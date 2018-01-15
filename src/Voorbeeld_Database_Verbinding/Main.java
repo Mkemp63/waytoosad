@@ -1,4 +1,4 @@
-package week3.les2.lesopdracht1;
+package Voorbeeld_Database_Verbinding;
 import java.sql.*;
 
 public class Main {
