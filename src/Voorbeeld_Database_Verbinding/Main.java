@@ -1,6 +1,7 @@
 package Voorbeeld_Database_Verbinding;
 import java.sql.*;
 
+
 public class Main {
 	private static final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
 	private static final String DB_URL = "jdbc:oracle:thin:@ondora02.hu.nl:8521/cursus02.hu.nl";
