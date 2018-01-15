@@ -21,7 +21,7 @@ public class Main {
 		
 		conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 		conn2 = DriverManager.getConnection(DB_URL, DB_USER2, DB_PASS2);
-		
+		//test
 		Statement stm = conn.createStatement();
 		String queryText = "SELECT id, string FROM test";
 		Statement stm2 = conn2.createStatement();
