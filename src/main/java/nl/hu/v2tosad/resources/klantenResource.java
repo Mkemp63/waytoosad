@@ -1,8 +1,13 @@
 package main.java.nl.hu.v2tosad.resources;
 
-import nl.hu.v2tosad.TOSAD.TestDAO;
-import nl.hu.v2tosad.model.Klant;
+import main.java.nl.hu.v2tosad.TOSAD.TestDAO;
+import main.java.nl.hu.v2tosad.model.Klant;
 
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
+import javax.ws.rs.*;
 import java.text.SimpleDateFormat;
 
 @Path("/klanten")
@@ -11,7 +16,7 @@ public class klantenResource {
 	// moet worden
 	@GET
 	@Produces("application/json")
-	public String getAllKlanten() {
+    public String getAllKlanten() {
 		JsonArrayBuilder jab = Json.createArrayBuilder();
             for (Klant k : test.selectKlanten()) {
                 JsonObjectBuilder job = Json.createObjectBuilder();
@@ -35,8 +40,14 @@ public class klantenResource {
 		JsonArray array = jab.build();
 		return array.toString();
 	}
-	
-	@POST
+
+    @POST
+	@Path("add/{name}")
+	public void createKlant() {
+        createKlant();
+    }
+
+    @POST
 	@Path("add/{name}")
 	public void createKlant(@PathParam("name") String naam) {
 		test.createKlant(naam);

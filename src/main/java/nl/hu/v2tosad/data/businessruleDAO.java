@@ -1,6 +1,6 @@
 package main.java.nl.hu.v2tosad.data;
 
-import nl.hu.v2tosad.model.Businessrule;
+import main.java.nl.hu.v2tosad.model.Businessrule;
 
 import java.util.ArrayList;
 

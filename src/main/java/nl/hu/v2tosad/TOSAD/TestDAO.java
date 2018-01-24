@@ -1,6 +1,6 @@
 package main.java.nl.hu.v2tosad.TOSAD;
 
-import nl.hu.v2tosad.model.Klant;
+import main.java.nl.hu.v2tosad.model.Klant;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package main.java.nl.hu.v2tosad.domain.provider;
 
-import nl.hu.v2tosad.domain.service.ApplicationService;
+import main.java.nl.hu.v2tosad.domain.service.ApplicationService;
 
 public class ServiceProvider {
 	private ApplicationService applicationService;

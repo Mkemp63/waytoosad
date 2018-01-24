@@ -1,8 +1,8 @@
 package main.java.nl.hu.v2tosad.resources;
 
-import nl.hu.v2tosad.data.businessruleDAO;
-import nl.hu.v2tosad.data.businessruleDAOImpl;
-import nl.hu.v2tosad.model.Businessrule;
+import main.java.nl.hu.v2tosad.data.businessruleDAO;
+import main.java.nl.hu.v2tosad.data.businessruleDAOImpl;
+import main.java.nl.hu.v2tosad.model.Businessrule;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;

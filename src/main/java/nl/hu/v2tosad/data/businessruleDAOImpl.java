@@ -1,18 +1,40 @@
 package main.java.nl.hu.v2tosad.data;
 
-import nl.hu.v2tosad.model.Businessrule;
+import main.java.nl.hu.v2tosad.model.Businessrule;
+import main.java.nl.hu.v2tosad.model.Klant;
 
+import java.sql.*;
 import java.util.ArrayList;
 
 public class businessruleDAOImpl implements businessruleDAO {
     private ArrayList<Businessrule> rules;
+
     public businessruleDAOImpl(){
         //legt de connectie met de db en haalt alle rules op en slaat ze op in list
         rules = new ArrayList<Businessrule>();
         // conect to db.
+        BaseDAO base = new BaseDAO();
+        base.getConnection();
+        try (Connection conn = base.getConnection()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from businessrule");
 
-        //save all rules in list.
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String code = rs.getString("code");
+                String rulename = rs.getString("rulename");
+                String businessruleType = rs.getString("businessruleType");
+                String discription = rs.getString("discription");
+                String tablename = rs.getString("tablename");
+                String status = rs.getString("status");
+                String dateModified = rs.getString("dateModified");
 
+                Businessrule b = new Businessrule(id,code, rulename, businessruleType, discription,tablename,status,dateModified);
+                rules.add(b);   //save all rules in list.
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
     }
 
     @Override

@@ -1,21 +1,22 @@
 package main.java.nl.hu.v2tosad.model;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Businessrule {
     private int id;
     private String code;
-    private String ruleName;
+    private String rulename;
     private String businessruleType;
     private String discription;
     private String tablename;
     private String status;
-    private Date   dateModified;
+    private String dateModified;
 
-    public Businessrule(int id, String code, String ruleName, String businessruleType, String discription, String tablename, String status, Date dateModified) {
+    public Businessrule(int id, String code, String rulename, String businessruleType, String discription, String tablename, String status, String dateModified) {
         this.id = id;
         this.code = code;
-        this.ruleName = ruleName;
+        this.rulename = rulename;
         this.businessruleType = businessruleType;
         this.discription = discription;
         this.tablename = tablename;
@@ -31,9 +32,7 @@ public class Businessrule {
         return code;
     }
 
-    public String getRuleName() {
-        return ruleName;
-    }
+    public String getRulename() {return rulename; }
 
     public String getBusinessruleType() {
         return businessruleType;
@@ -51,7 +50,7 @@ public class Businessrule {
         return status;
     }
 
-    public Date getDateModified() {
+    public String getDateModified() {
         return dateModified;
     }
 
@@ -60,7 +59,7 @@ public class Businessrule {
         return "Businessrule{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
-                ", ruleName='" + ruleName + '\'' +
+                ", ruleName='" + rulename + '\'' +
                 ", businessruleType='" + businessruleType + '\'' +
                 ", discription='" + discription + '\'' +
                 ", tablename='" + tablename + '\'' +
