@@ -1,7 +1,7 @@
 package main.java.nl.hu.v2tosad.data;
 
 import main.java.nl.hu.v2tosad.model.Businessrule;
-import main.java.nl.hu.v2tosad.model.Klant;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -44,12 +44,28 @@ public class businessruleDAOImpl implements businessruleDAO {
 
     @Override
     public ArrayList<Businessrule> getBusinessrulesByID(ArrayList<Integer> idList) {
-        return null;
+        ArrayList<Businessrule> out = new ArrayList<Businessrule>();
+        for (int i : idList){
+            for (Businessrule r: rules){
+                if (i == r.getId()){
+                    out.add(r);
+                }
+            }
+        }
+        return out;
     }
 
     @Override
     public void setStatus(Businessrule rule, String status) {
+        BaseDAO base = new BaseDAO();
+        base.getConnection();
+        try (Connection conn = base.getConnection()) {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE businessrule Set status = 'Implementing' where id = "+rule.getId()+" ;");
 
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
     }
 }
 
