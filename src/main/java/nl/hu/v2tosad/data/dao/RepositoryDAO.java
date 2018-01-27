@@ -1,9 +1,12 @@
 package nl.hu.v2tosad.data.dao;
 
+import nl.hu.v2tosad.data.model.AttributeCompareRule;
+import nl.hu.v2tosad.data.model.AttributeListRule;
 import nl.hu.v2tosad.data.model.AttributeRangeRule;
 import nl.hu.v2tosad.data.model.BusinessRule;
 
 import java.sql.*;
+import java.text.ParseException;
 
 // connection to tool db
 public class RepositoryDAO {
@@ -71,7 +74,33 @@ public class RepositoryDAO {
 				while(rs.next()) {
 					br = new AttributeRangeRule(br, rs.getInt("RANGERULE_ID"), rs.getInt("MINVAL"), rs.getInt("MAXVAL"), rs.getString("OPERATORVALUE"), rs.getString("COLUMNNAME"));
 				}
+				
+			} else if (br.getBusinessRuleType().equals("Attribute Compare Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM COMPARE_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
+				while(rs.next()) {
+					br = new AttributeCompareRule(br, rs.getInt("COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("COMPAREVALUE"), rs.getString("OPERATORVALUE"));
+				}
+			} else if (br.getBusinessRuleType().equals("Attribute List Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM LIST_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
+				int list_id = 0;
+				while(rs.next()) {
+					br = new AttributeListRule(br, rs.getInt("LIST_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("OPERATORVALUE"));
+					list_id = rs.getInt("LIST_RULE_ID");
+				}
+				rs = stmt.executeQuery("SELECT * FROM LIST_RULE_VALUE WHERE ID = " + list_id);
+				
+				//Parse BusinessRule object naar een AttributeListRule zodat de functies gebruikt kunnen worden van de AttributeListRule klasse
+				//DIt is nodig om de listvalues toe te kunnen voegen aan de arraylist van AttributeListRule
+				AttributeListRule attlr = (AttributeListRule)br;
+
+				while(rs.next()) {
+					String a = rs.getString("ITEM_VALUE");
+					attlr.addValue(a);
+				}
+				//Hier wordt de Parse weer teruggezet.
+				br = attlr;
 			}
+			
 			
 //			if (br.getId() == 0) {
 //				SQLException sqle = new SQLException();
