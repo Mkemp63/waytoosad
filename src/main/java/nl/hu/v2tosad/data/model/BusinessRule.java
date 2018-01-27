@@ -1,7 +1,7 @@
 package nl.hu.v2tosad.data.model;
 
 import java.util.Date;
-
+//POJO
 public class BusinessRule {
 	protected int id;
 	protected String status;

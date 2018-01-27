@@ -1,5 +1,6 @@
 package nl.hu.v2tosad.data.model;
 
+//POJO
 public class AttributeCompareRule extends BusinessRule{
 	private int compareRuleId;
 	private String compareName;

@@ -1,5 +1,5 @@
 package nl.hu.v2tosad.data.model;
-
+//POJO
 public class TupleCompareRule extends BusinessRule{
 	private int compareRuleId;
 	private String columnName;

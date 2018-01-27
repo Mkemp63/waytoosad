@@ -1,5 +1,5 @@
 package nl.hu.v2tosad.data.model;
-
+//POJO
 public class TupleOtherRule extends BusinessRule{
 	private int otherRuleId;
 	private String columnName;

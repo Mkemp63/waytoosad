@@ -1,10 +1,11 @@
 package nl.hu.v2tosad.data.dao;
 
+import nl.hu.v2tosad.data.model.BusinessRule;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import nl.hu.v2tosad.data.model.BusinessRule;
-
+// implements generated code in target db
 public class TargetDAOImpl implements TargetDAO {
 	private String schemaName;
 	private String DB_DRIV;

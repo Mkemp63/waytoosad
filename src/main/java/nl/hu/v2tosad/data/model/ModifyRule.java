@@ -1,5 +1,5 @@
 package nl.hu.v2tosad.data.model;
-
+//POJO
 public class ModifyRule extends BusinessRule{
 	private int modifyRuleId;
 	private String plSqlCode;

@@ -1,7 +1,7 @@
 package nl.hu.v2tosad.data.model;
 
 import java.sql.Date;
-
+//POJO
 public class AttributeRangeRule extends BusinessRule{
 	private int rangeRuleId;
 	private int minval;

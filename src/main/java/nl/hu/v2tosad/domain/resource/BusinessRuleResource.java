@@ -1,19 +1,16 @@
 package nl.hu.v2tosad.domain.resource;
 
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import nl.hu.v2tosad.data.model.BusinessRule;
+import nl.hu.v2tosad.domain.provider.ServiceProvider;
+import nl.hu.v2tosad.domain.service.BusinessRuleService;
 
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.*;
-
-import nl.hu.v2tosad.data.model.BusinessRule;
-import nl.hu.v2tosad.domain.provider.ServiceProvider;
-import nl.hu.v2tosad.domain.service.ApplicationService;
-import nl.hu.v2tosad.domain.service.BusinessRuleService;
-
+import java.text.SimpleDateFormat;
+// starts process for rest service
 @Path("/generate")
 public class BusinessRuleResource {
 	private BusinessRuleService service = (BusinessRuleService) ServiceProvider.getApplicationService(new BusinessRuleService());

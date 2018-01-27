@@ -1,5 +1,5 @@
 package nl.hu.v2tosad.data.model;
-
+//POJO
 public class InterEntityCompareRule extends BusinessRule{
 	private int interEntityCompareRuleId;
 	private String columnName;

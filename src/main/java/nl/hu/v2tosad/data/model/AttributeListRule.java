@@ -1,7 +1,7 @@
 package nl.hu.v2tosad.data.model;
 
 import java.util.ArrayList;
-
+//POJO
 public class AttributeListRule extends BusinessRule{
 	private int listRuleId;
 	private String columnName;

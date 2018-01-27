@@ -1,15 +1,11 @@
 package nl.hu.v2tosad.data.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import nl.hu.v2tosad.data.model.AttributeRangeRule;
 import nl.hu.v2tosad.data.model.BusinessRule;
 
+import java.sql.*;
+
+// connection to tool db
 public class RepositoryDAO {
 	private Connection conn;
 	private static final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
