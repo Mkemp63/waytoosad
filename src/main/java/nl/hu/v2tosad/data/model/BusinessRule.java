@@ -25,6 +25,11 @@ public class BusinessRule {
 		this.discription = discription;
 		this.tableName = tableName;
 	}
+	
+	public String generateCode() {
+		return null;
+	}
+	
 	public int getId() {
 		return id;
 	}

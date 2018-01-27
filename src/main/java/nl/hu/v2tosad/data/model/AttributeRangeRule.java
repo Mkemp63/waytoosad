@@ -31,6 +31,10 @@ public class AttributeRangeRule extends BusinessRule{
 		this.column = column;
 	}
 	
+	public String generateCode() {
+		//TODO
+		return null;
+	}
 
 	public int getRangeRuleId() {
 		return rangeRuleId;
