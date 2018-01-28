@@ -89,7 +89,7 @@ public class BusinessRule {
                 ", businessRuleType='" + businessRuleType + '\'' +
                 ", rule_Name='" + rule_Name + '\'' +
                 ", discription='" + discription + '\'' +
-                ", tableName='" + tableName + '\'' +
-                '}';
+                ", tableName='" + tableName + '\'' +", "
+                ;
     }
 }

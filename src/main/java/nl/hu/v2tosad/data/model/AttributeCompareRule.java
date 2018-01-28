@@ -56,4 +56,13 @@ public class AttributeCompareRule extends BusinessRule{
 		this.operator = operator;
 	}
 
+    @Override
+    public String toString() {
+        return super.toString()+"AttributeCompareRule{" +
+                "compareRuleId=" + compareRuleId +
+                ", compareName='" + compareName + '\'' +
+                ", compareValue='" + compareValue + '\'' +
+                ", operator='" + operator + '\'' +
+                '}'+'}';
+    }
 }

@@ -1,17 +1,8 @@
 package nl.hu.v2tosad.data.dao;
 
-import nl.hu.v2tosad.data.model.AttributeCompareRule;
-import nl.hu.v2tosad.data.model.AttributeListRule;
-import nl.hu.v2tosad.data.model.AttributeOtherRule;
-import nl.hu.v2tosad.data.model.AttributeRangeRule;
-import nl.hu.v2tosad.data.model.BusinessRule;
-import nl.hu.v2tosad.data.model.EntityOtherRule;
-import nl.hu.v2tosad.data.model.InterEntityCompareRule;
-import nl.hu.v2tosad.data.model.ModifyRule;
-import nl.hu.v2tosad.data.model.TupleCompareRule;
+import nl.hu.v2tosad.data.model.*;
 
 import java.sql.*;
-import java.text.ParseException;
 
 // connection to tool db
 public class RepositoryDAO {
@@ -148,7 +139,7 @@ public class RepositoryDAO {
 //			}
 			
 			rs.close();
-			this.conn.close();
+
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

@@ -39,4 +39,13 @@ public class AttributeListRule extends BusinessRule{
 		this.listRuleId = listRuleId;
 	}
 
+    @Override
+    public String toString() {
+        return super.toString()+"AttributeListRule{" +
+                "listRuleId=" + listRuleId +
+                ", columnName='" + columnName + '\'' +
+                ", operator='" + operator + '\'' +
+                ", compareValue=" + compareValue +
+                '}'+'}';
+    }
 }

@@ -10,8 +10,10 @@ public class InterEntityCompareRule extends BusinessRule{
 	public InterEntityCompareRule() {
 		
 	}
-	
-	public InterEntityCompareRule(BusinessRule br, int interEntityCompareRuleId, String columnName, String tableName2, String columnName2, String operator) {
+
+
+
+    public InterEntityCompareRule(BusinessRule br, int interEntityCompareRuleId, String columnName, String tableName2, String columnName2, String operator) {
 		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
 		this.interEntityCompareRuleId = interEntityCompareRuleId;
 		this.columnName = columnName;
@@ -24,4 +26,15 @@ public class InterEntityCompareRule extends BusinessRule{
 	/*public String generateCode() {
 		
 	}*/
+
+	@Override
+    public String toString() {
+        return super.toString()+"InterEntityCompareRule{" +
+                "interEntityCompareRuleId=" + interEntityCompareRuleId +
+                ", columnName='" + columnName + '\'' +
+                ", tableName2='" + tableName2 + '\'' +
+                ", columnName2='" + columnName2 + '\'' +
+                ", operator='" + operator + '\'' +
+                '}'+'}';
+    }
 }

@@ -22,4 +22,14 @@ public class TupleCompareRule extends BusinessRule{
 	/*public String generateCode() {
 		
 	}*/
+
+    @Override
+    public String toString() {
+        return super.toString()+"TupleCompareRule{" +
+                "compareRuleId=" + compareRuleId +
+                ", columnName='" + columnName + '\'' +
+                ", compareValue='" + compareValue + '\'' +
+                ", operator='" + operator + '\'' +
+                '}'+'}';
+    }
 }

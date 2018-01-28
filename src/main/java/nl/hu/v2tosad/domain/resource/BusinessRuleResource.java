@@ -78,7 +78,7 @@ public class BusinessRuleResource {
 
         JsonArrayBuilder jab = Json.createArrayBuilder();
         for (int id : rulelist) {
-            BusinessRule b = dao.getBusinessRule(id);
+            BusinessRule b = service.getBusinessRule(id);
             JsonObjectBuilder job = Json.createObjectBuilder();
             job.add("id", b.getId());
             job.add("rule", b.toString());

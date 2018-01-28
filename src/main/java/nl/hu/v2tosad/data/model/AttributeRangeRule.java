@@ -75,6 +75,15 @@ public class AttributeRangeRule extends BusinessRule{
 	public void setColumn(String column) {
 		this.column = column;
 	}
-	
 
+    @Override
+    public String toString() {
+        return super.toString()+ "AttributeRangeRule{" +
+                "rangeRuleId=" + rangeRuleId +
+                ", minval=" + minval +
+                ", maxval=" + maxval +
+                ", operator='" + operator + '\'' +
+                ", column='" + column + '\'' +
+                '}'+'}';
+    }
 }
