@@ -31,4 +31,12 @@ public class AttributeListRule extends BusinessRule{
 		this.compareValue.remove(item);
 	}
 
+	public int getListRuleId() {
+		return listRuleId;
+	}
+
+	public void setListRuleId(int listRuleId) {
+		this.listRuleId = listRuleId;
+	}
+
 }

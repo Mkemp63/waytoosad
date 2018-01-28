@@ -1,9 +1,17 @@
 package nl.hu.v2tosad.data.dao;
 
+import nl.hu.v2tosad.data.model.AttributeCompareRule;
+import nl.hu.v2tosad.data.model.AttributeListRule;
+import nl.hu.v2tosad.data.model.AttributeOtherRule;
 import nl.hu.v2tosad.data.model.AttributeRangeRule;
 import nl.hu.v2tosad.data.model.BusinessRule;
+import nl.hu.v2tosad.data.model.EntityOtherRule;
+import nl.hu.v2tosad.data.model.InterEntityCompareRule;
+import nl.hu.v2tosad.data.model.ModifyRule;
+import nl.hu.v2tosad.data.model.TupleCompareRule;
 
 import java.sql.*;
+import java.text.ParseException;
 
 // connection to tool db
 public class RepositoryDAO {
@@ -71,7 +79,68 @@ public class RepositoryDAO {
 				while(rs.next()) {
 					br = new AttributeRangeRule(br, rs.getInt("RANGERULE_ID"), rs.getInt("MINVAL"), rs.getInt("MAXVAL"), rs.getString("OPERATORVALUE"), rs.getString("COLUMNNAME"));
 				}
+				
+			} else if (br.getBusinessRuleType().equals("Attribute Compare Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM COMPARE_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
+				while(rs.next()) {
+					br = new AttributeCompareRule(br, rs.getInt("COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("COMPAREVALUE"), rs.getString("OPERATORVALUE"));
+				}
+			} else if (br.getBusinessRuleType().equals("Attribute List Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM LIST_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
+				int list_id = 0;
+				while(rs.next()) {
+					br = new AttributeListRule(br, rs.getInt("LIST_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("OPERATORVALUE"));
+					list_id = rs.getInt("LIST_RULE_ID");
+				}
+				rs = stmt.executeQuery("SELECT * FROM LIST_RULE_VALUE WHERE ID = " + list_id);
+				
+				//Parse BusinessRule object naar een AttributeListRule zodat de functies gebruikt kunnen worden van de AttributeListRule klasse
+				//DIt is nodig om de listvalues toe te kunnen voegen aan de arraylist van AttributeListRule
+				AttributeListRule attlr = (AttributeListRule)br;
+
+				while(rs.next()) {
+					String a = rs.getString("ITEM_VALUE");
+					attlr.addValue(a);
+				}
+				//Hier wordt de Parse weer teruggezet.
+				br = attlr;
+			} 	else if (br.getBusinessRuleType().equals("Inter-Entity Compare Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM inter_entity_compare_rule WHERE fk_businessrule_id =" + br.getId());
+				while (rs.next()) {
+					br = new InterEntityCompareRule(br, rs.getInt("INTER_ENTITY_COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("TABLENAME2"), rs.getString("COLUMN2"), rs.getString("OPERATOR"));
+				}
 			}
+			else if (br.getBusinessRuleType().equals("Entity Other Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM other_rule WHERE fk_businessrule_id =" + br.getId());
+				while (rs.next()) {
+					br = new EntityOtherRule(br, rs.getInt("OTHER_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("PLSQLCODE"));
+				}
+			}
+			else if (br.getBusinessRuleType().equals("Modify Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM modify_rule WHERE fk_businessrule_id =" + br.getId());
+				while (rs.next()) {
+					br = new ModifyRule(br, rs.getInt("MODIFY_RULE_ID"), rs.getString("PLSQLCODE"));
+				}
+			}
+			else if (br.getBusinessRuleType().equals("Tuple Other Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM other_rule WHERE fk_businessrule_id =" + br.getId());
+				while (rs.next()) {
+					br = new ModifyRule(br, rs.getInt("OTHER_RULE_ID"), rs.getString("PLSQLCODE"));
+				}
+			}
+			else if (br.getBusinessRuleType().equals("Tuple Compare Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM compare_rule WHERE fk_businessrule_id =" + br.getId());
+				while (rs.next()) {
+					br = new TupleCompareRule(br, rs.getInt("COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("COMPAREVALUE"), rs.getString("OPERATORVALUE"));
+				}
+			}
+			else if (br.getBusinessRuleType().equals("Attribute Other Rule")) {
+				rs = stmt.executeQuery("SELECT * FROM other_rule WHERE fk_businessrule_id =" + br.getId());
+				while (rs.next()) {
+					br = new AttributeOtherRule(br, rs.getInt("OHTER_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("PLSQLCODE"));
+				}
+			}
+			
 			
 //			if (br.getId() == 0) {
 //				SQLException sqle = new SQLException();
