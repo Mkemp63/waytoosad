@@ -1,15 +1,16 @@
 package nl.hu.v2tosad.domain.resource;
 
+import nl.hu.v2tosad.data.dao.RepositoryDAO;
 import nl.hu.v2tosad.data.model.BusinessRule;
 import nl.hu.v2tosad.domain.provider.ServiceProvider;
 import nl.hu.v2tosad.domain.service.BusinessRuleService;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.ws.rs.*;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 // starts process for rest service
 @Path("/generate")
 public class BusinessRuleResource {
@@ -51,5 +52,38 @@ public class BusinessRuleResource {
 	public void doeIets(@PathParam("text") String text) {
 		System.out.println(text);
 	}
-	
+
+
+
+    @POST
+    @Path("/rules")
+    @Produces("application/json")
+    public String generateRule(InputStream is) {
+        RepositoryDAO dao = new RepositoryDAO();
+        ArrayList<Integer> rulelist = new ArrayList<Integer>();
+        System.out.println(is);
+        JsonObject object = Json.createReader(is).readObject();
+        System.out.println(object);
+        JsonArray lineItems = object.getJsonArray("rulelist");
+        for (Object o : lineItems) {
+            JsonObject jsonLineItem = (JsonObject) o;
+            System.out.println(jsonLineItem);
+            int key = jsonLineItem.getInt("id");
+            rulelist.add(key);
+        }
+
+        System.out.println(rulelist);
+
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        for (int id : rulelist) {
+            BusinessRule b = dao.getBusinessRule(id);
+            JsonObjectBuilder job = Json.createObjectBuilder();
+            job.add("id", b.getId());
+            job.add("rule", b.toString());
+            jab.add(job);
+        }
+        return jab.build().toString();
+    }
 }
+
+

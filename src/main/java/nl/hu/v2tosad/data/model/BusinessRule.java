@@ -79,4 +79,17 @@ public class BusinessRule {
 		this.tableName = tableName;
 	}
 
+    @Override
+    public String toString() {
+        return "BusinessRule{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", dateModified=" + dateModified +
+                ", code='" + code + '\'' +
+                ", businessRuleType='" + businessRuleType + '\'' +
+                ", rule_Name='" + rule_Name + '\'' +
+                ", discription='" + discription + '\'' +
+                ", tableName='" + tableName + '\'' +
+                '}';
+    }
 }
