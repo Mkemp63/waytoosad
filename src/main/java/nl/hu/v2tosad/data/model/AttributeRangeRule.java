@@ -4,8 +4,8 @@ import java.sql.Date;
 //POJO
 public class AttributeRangeRule extends BusinessRule{
 	private int rangeRuleId;
-	private int minval;
-	private int maxval;
+	private int minVal;
+	private int maxVal;
 	private String operator;
 	private String column;
 	
@@ -13,27 +13,32 @@ public class AttributeRangeRule extends BusinessRule{
 		
 	}
 	
-	public AttributeRangeRule(int id, String status, Date dateModified, String code, String businessRuleType, String rule_Name, String discription, String tableName, int rangeRuleId, int minval, int maxval, String operator, String column) {
+	public AttributeRangeRule(int id, String status, Date dateModified, String code, String businessRuleType, String rule_Name, String discription, String tableName, int rangeRuleId, int minVal, int maxVal, String operator, String column) {
 		super(id, status, dateModified, code, businessRuleType, rule_Name, discription, tableName);
 		this.rangeRuleId = rangeRuleId;
-		this.minval = minval;
-		this.maxval = maxval;
+		this.minVal = minVal;
+		this.maxVal = maxVal;
 		this.operator = operator;
 		this.column = column;
 	}
 	
-	public AttributeRangeRule(BusinessRule br, int rangeRuleId, int minval, int maxval, String operator, String column) {
+	public AttributeRangeRule(BusinessRule br, int rangeRuleId, int minVal, int maxVal, String operator, String column) {
 		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
 		this.rangeRuleId = rangeRuleId;
-		this.minval = minval;
-		this.maxval = maxval;
+		this.minVal = minVal;
+		this.maxVal = maxVal;
 		this.operator = operator;
 		this.column = column;
 	}
 	
 	public String generateCode() {
-		//TODO
-		return null;
+		StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + super.getTableName());
+		result.append(" add constraint " + super.getCode());
+		result.append("check (" + column + " " + operator + " " + minVal);
+		result.append(" and " + maxVal);
+		result.append(");");
+		System.out.println(result.toString());
+		return result.toString();
 	}
 
 	public int getRangeRuleId() {
@@ -45,19 +50,19 @@ public class AttributeRangeRule extends BusinessRule{
 	}
 
 	public int getMinval() {
-		return minval;
+		return minVal;
 	}
 
-	public void setMinval(int minval) {
-		this.minval = minval;
+	public void setMinval(int minVal) {
+		this.minVal = minVal;
 	}
 
 	public int getMaxval() {
-		return maxval;
+		return maxVal;
 	}
 
-	public void setMaxval(int maxval) {
-		this.maxval = maxval;
+	public void setMaxval(int maxVal) {
+		this.maxVal = maxVal;
 	}
 
 	public String getOperator() {

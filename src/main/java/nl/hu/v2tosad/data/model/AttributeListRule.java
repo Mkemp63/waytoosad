@@ -4,24 +4,32 @@ import java.util.ArrayList;
 //POJO
 public class AttributeListRule extends BusinessRule{
 	private int listRuleId;
-	private String columnName;
+	private String column;
 	private String operator;
 	private ArrayList<String> compareValue = new ArrayList<String>();
+	private String listTable;
 	
 	public AttributeListRule() {
 		
 	}
 	
-	public AttributeListRule(BusinessRule br, int listRuleId, String columnName, String operator) {
+	public AttributeListRule(BusinessRule br, int listRuleId, String column, String operator, String listTable) {
 		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
 		this.listRuleId = listRuleId;
-		this.columnName = columnName;
+		this.column = column;
 		this.operator = operator;
+		this.listTable = listTable;
 	}
 	
 	public String generateCode() {
-		//TODO
-		return null;
+		StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + super.getTableName());
+		result.append(" add constraint " + super.getCode());
+		result.append("check (" + column + " " + operator + " " + compareValue);
+		result.append(" from " + listTable);
+		result.append(" where FK_LIST_RULE_ID = " + listRuleId);
+		result.append(");");
+		System.out.println(result.toString());
+		return result.toString();
 	}
 	
 	public void addValue(String item) {
