@@ -5,11 +5,34 @@ public class GenerateImplOracle implements Generate{
     public String generateCode(BusinessRule b){
         String type = b.getBusinessRuleType();
         System.out.println("generateImplOracle generate code input= " +b);
-        if (b instanceof AttributeCompareRule){
+        if (b instanceof AttributeCompareRule) {
             AttributeCompareRule c = (AttributeCompareRule) b;
-            System.out.println("generate instanceof = "+c);
+            System.out.println("generate instanceof = " + c);
             return generateAttributeCompareRule(c);
-
+        }else if(b instanceof AttributeListRule ) {
+            AttributeListRule c = (AttributeListRule) b;
+            return generateAttributeListRule(c);
+        }else if(b instanceof AttributeOtherRule) {
+            AttributeOtherRule c = (AttributeOtherRule)b;
+            return generateAttributeOtherRule(c);
+        }else if(b instanceof AttributeRangeRule) {
+            AttributeRangeRule c = (AttributeRangeRule)b;
+            return generateAttributeRangeRule(c);
+        }else if(b instanceof EntityOtherRule) {
+            EntityOtherRule c = (EntityOtherRule)b;
+            return generateEntityOtherRule(c);
+        }else if(b instanceof InterEntityCompareRule) {
+            InterEntityCompareRule c = (InterEntityCompareRule)b;
+            return generateInterEntityCompareRule(c);
+        }else if(b instanceof ModifyRule) {
+            ModifyRule c = (ModifyRule)b;
+            return generateModifyRule(c);
+        }else if(b instanceof TupleCompareRule) {
+            TupleCompareRule c = (TupleCompareRule)b;
+            return generateTupleCompareRule(c);
+        }else if(b instanceof TupleOtherRule) {
+            TupleOtherRule c = (TupleOtherRule) b;
+            return generateTupleOtherRule(c);
         }else {return "";}
     }
 
@@ -94,12 +117,27 @@ public String generateInterEntityCompareRule(InterEntityCompareRule i) {
 	return result.toString();
 }
 
-@Override
-public String generateTupleCompareRule(TupleCompareRule t) {
-	StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + t.getTableName());
-	result.append(" add constraint " + t.getCode());
-	result.append(" check (" + t.getColumn() + " " + t.getOperator() + " TOSAD_2017_2B_TEAM2_TARGET." + t.getCompareColumn());
-	result.append(")");
-	return result.toString();
-}
+    @Override
+    public String generateTupleCompareRule(TupleCompareRule t) {
+        StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + t.getTableName());
+        result.append(" add constraint " + t.getCode());
+        result.append(" check (" + t.getColumn() + " " + t.getOperator() + " TOSAD_2017_2B_TEAM2_TARGET." + t.getCompareColumn());
+        result.append(")");
+        return result.toString();
+    }
+
+    public String generateAttributeOtherRule(AttributeOtherRule b){
+        return "not implemented";
+    }
+
+    public String generateEntityOtherRule(EntityOtherRule b){
+        return "not implemented";
+    }
+
+    public String generateModifyRule(ModifyRule b){
+        return "not implemented";
+    }
+    public String generateTupleOtherRule(TupleOtherRule b){
+        return "not implemented";
+    }
 }
