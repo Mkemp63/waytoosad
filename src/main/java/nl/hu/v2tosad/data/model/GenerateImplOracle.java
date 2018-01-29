@@ -93,9 +93,9 @@ public String generateInterEntityCompareRule(InterEntityCompareRule i) {
 	result.append("\nthen v_result := 'NOT EQUAL'; \nend");
 	result.append("\n if " + i.getOperator() + " != v_result then");
 	result.append("\nraise_application_error(-20000," + i.getCode() + " description: " + i.getDiscription() + " violated)");
-	result.append("\nend if; \nend" + i.getCode());
+	result.append("\nend if; \nend " + i.getCode() + ";");
 	
-	StringBuilder result2 = new StringBuilder("create or replace trigger " + i.getCode());
+	StringBuilder result2 = new StringBuilder("\ncreate or replace trigger " + i.getCode());
 	result2.append("\nbefore or update on table TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
 	result2.append("\nfor each row \ndeclare \nv_result varchar2; \nbegin \ncase TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + "." + i.getColumnName());
 	result2.append("\nwhen > TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
@@ -112,7 +112,7 @@ public String generateInterEntityCompareRule(InterEntityCompareRule i) {
 	result2.append("\nthen v_result := 'NOT EQUAL'; \nend");
 	result2.append("\n if " + i.getOperator() + " != v_result then");
 	result2.append("\nraise_application_error(-20000," + i.getCode() + " description: " + i.getDiscription() + " violated)");
-	result2.append("\nend if; \nend" + i.getCode());
+	result2.append("\nend if; \nend" + i.getCode() + ";");
 	result.append("\n" + result2.toString());
 	return result.toString();
 }
