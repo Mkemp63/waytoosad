@@ -18,4 +18,12 @@ public class ModifyRule extends BusinessRule{
 	/*public String generateCode() {
 		
 	}*/
+
+    @Override
+    public String toString() {
+        return super.toString()+"ModifyRule{" +
+                "modifyRuleId=" + modifyRuleId +
+                ", plSqlCode='" + plSqlCode + '\'' +
+                '}'+'}';
+    }
 }

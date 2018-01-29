@@ -17,6 +17,15 @@ public class AttributeOtherRule extends BusinessRule{
 	}
 	
 	//TODO
+
+    @Override
+    public String toString() {
+        return super.toString()+"AttributeOtherRule{" +
+                "otherRuleId=" + otherRuleId +
+                ", columnName='" + columnName + '\'' +
+                ", plSqlCode='" + plSqlCode + '\'' +
+                '}'+'}';
+    }
 	/*public String generateCode() {
 		
 	}*/

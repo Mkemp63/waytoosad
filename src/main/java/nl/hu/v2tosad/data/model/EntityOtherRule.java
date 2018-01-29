@@ -16,6 +16,15 @@ public class EntityOtherRule extends BusinessRule {
 		this.plSqlCode = plSqlCode;
 	}
 	//TODO
+
+    @Override
+    public String toString() {
+        return super.toString()+"EntityOtherRule{" +
+                "otherRuleId=" + otherRuleId +
+                ", columnName='" + columnName + '\'' +
+                ", plSqlCode='" + plSqlCode + '\'' +
+                '}'+'}';
+    }
 	/*public String GenerateCode() {
 		
 	}*/

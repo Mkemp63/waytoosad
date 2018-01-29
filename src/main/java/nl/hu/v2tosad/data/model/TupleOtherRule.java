@@ -20,4 +20,13 @@ public class TupleOtherRule extends BusinessRule{
 	/*public String generateCode() {
 		
 	}*/
+
+    @Override
+    public String toString() {
+        return super.toString()+"TupleOtherRule{" +
+                "otherRuleId=" + otherRuleId +
+                ", columnName='" + columnName + '\'' +
+                ", plSqlCode='" + plSqlCode + '\'' +
+                '}'+'}';
+    }
 }
