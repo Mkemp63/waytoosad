@@ -157,6 +157,28 @@ public class RepositoryDAO {
 
 	}
 
+	public Database getTarget(){
+        Database db = null;
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM database_schema WHERE ID = 1");
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String name = rs.getString("name");
+                String type = rs.getString("db_type");
+                String url = rs.getString("db_url");
+                String user = rs.getString("db_user");
+                String pass = rs.getString("db_pass");
+                String driv = rs.getString("db_driv");
+                db = new Database(name, type, url, user, pass, driv);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+	    return db;
+    }
+
     public void closeConnection() {
 	    try{
         conn.close();
