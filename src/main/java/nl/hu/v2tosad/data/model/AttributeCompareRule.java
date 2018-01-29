@@ -17,15 +17,12 @@ public class AttributeCompareRule extends BusinessRule{
 		this.operator = operator;
 		this.column = column;
 	}
-	
-	public String generateCode() {
-		StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + super.getTableName());
-		result.append(" add constraint " + super.getCode());
-		result.append("check (" + column + operator + compareValue);
-		result.append(")");
-		System.out.println(result.toString());
-		return result.toString();
-	}
+
+    public String generateCode(String dbType){
+/*        Generate g = new GenerateFactory(dbType);
+        return g.generateAttributeCompareRule();*/
+        return null;
+    }
 
 	public int getCompareRuleId() {
 		return compareRuleId;
@@ -59,4 +56,11 @@ public class AttributeCompareRule extends BusinessRule{
 		this.operator = operator;
 	}
 
+    public String getColumn() {
+        return column;
+    }
+
+    public void setColumn(String column) {
+        this.column = column;
+    }
 }

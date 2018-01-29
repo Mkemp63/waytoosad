@@ -17,23 +17,12 @@ public class AttributeListRule extends BusinessRule{
 		this.operator = operator;
 		this.listTable = listTable;
 	}
-	
-	public String generateCode() {
-		StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + super.getTableName());
-		result.append(" add constraint " + super.getCode());
-		result.append("check (" + column + " " + operator + "(" + compareValue);
-		for (String s : compareValue) {
-			if (compareValue.indexOf(s) == 0) {
-				result.append("'" + s + "'");
-			}
-			else { 
-				result.append(", '" + s + "'");
-			}
-		}
-		result.append("))");
-		System.out.println(result.toString());
-		return result.toString();
-	}
+
+    public String generateCode(String dbType){
+      /*  Generate g = new GenerateFactory(dbType);
+        return g.generateAttributeListRule();*/
+        return null;
+    }
 	
 	public void addValue(String item) {
 		this.compareValue.add(item);

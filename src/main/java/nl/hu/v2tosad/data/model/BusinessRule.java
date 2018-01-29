@@ -11,7 +11,8 @@ public class BusinessRule {
 	protected String rule_Name;
 	protected String discription;
 	protected String tableName;
-	
+
+
 	public BusinessRule(){
 
 	}
@@ -28,9 +29,9 @@ public class BusinessRule {
 	}
 	
 	public String generateCode() {
-		return null;
-	}
-	
+        return null;
+    }
+
 	public int getId() {
 		return id;
 	}

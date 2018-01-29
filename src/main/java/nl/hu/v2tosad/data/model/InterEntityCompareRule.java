@@ -16,11 +16,12 @@ public class InterEntityCompareRule extends BusinessRule{
 		this.columnName2 = columnName2;
 		this.operator = operator;
 	}
-	
-	//TODO
-	/*public String generateCode() {
-		
-	}*/
+
+	public String generateCode(String dbType){
+ /*       Generate g = new GenerateFactory(dbType);
+        return g.generateInterEntityCompareRule();*/
+        return null;
+    }
 
 	@Override
     public String toString() {

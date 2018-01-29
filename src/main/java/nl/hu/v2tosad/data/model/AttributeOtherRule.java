@@ -13,7 +13,12 @@ public class AttributeOtherRule extends BusinessRule{
 		this.plSqlCode = plSqlCode;
 	}
 	
-	//TODO generateCode()
+
+    public String generateCode(String dbType){/*
+        Generate g = new GenerateFactory(dbType);
+        return g.generateAttributeOtherRule();*/
+        return null;
+    }
 
     @Override
     public String toString() {

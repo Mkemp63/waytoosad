@@ -1,6 +1,5 @@
 package nl.hu.v2tosad.data.model;
 
-import java.sql.Date;
 //POJO
 public class AttributeRangeRule extends BusinessRule{
 	private int rangeRuleId;
@@ -18,16 +17,13 @@ public class AttributeRangeRule extends BusinessRule{
 		this.operator = operator;
 		this.column = column;
 	}
-	
-	public String generateCode() {
-		StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + super.getTableName());
-		result.append(" add constraint " + super.getCode());
-		result.append("check (" + column + " " + operator + " " + minVal);
-		result.append(" and " + maxVal);
-		result.append(")");
-		System.out.println(result.toString());
-		return result.toString();
-	}
+
+    public String generateCode(String dbType){
+ /*       Generate g = new GenerateFactory(dbType);
+        return g.generateAttributeRangeRule();*/
+        return null;
+
+    }
 
 	public int getRangeRuleId() {
 		return rangeRuleId;

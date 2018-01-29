@@ -12,11 +12,12 @@ public class TupleOtherRule extends BusinessRule{
 		this.columnName = columnName;
 		this.plSqlCode = plSqlCode;
 	}
-	
-	//TODO
-	/*public String generateCode() {
-		
-	}*/
+
+    public String generateCode(String dbType){
+/*        Generate g = new GenerateFactory(dbType);
+        return g.generateTupleOtherRule();*/
+        return null;
+    }
 
     @Override
     public String toString() {

@@ -14,13 +14,10 @@ public class TupleCompareRule extends BusinessRule{
 		this.compareColumn= compareColumn;
 		this.operator = operator;
 	}
-	
-	public String generateCode() {
-		StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + super.getTableName());
-		result.append(" add constraint " + super.getCode());
-		result.append("check (" + column + operator + compareColumn);
-		result.append(")");
-		System.out.println(result.toString());
-		return result.toString();
-	}
+
+    public String generateCode(String dbType){
+     /*   Generate g = new GenerateFactory(dbType);
+        return g.generateTupleCompareRule();*/
+        return null;
+    }
 }

@@ -1,6 +1,8 @@
 package nl.hu.v2tosad.data.dao;
 
 import nl.hu.v2tosad.data.model.BusinessRule;
+import nl.hu.v2tosad.data.model.Generate;
+import nl.hu.v2tosad.data.model.GenerateFactory;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -21,10 +23,14 @@ public class TargetDAOImpl implements TargetDAO {
 	}
 
 	@Override
-	public void generateConstraint(ArrayList<BusinessRule> rules) {
+	public void generateRules(ArrayList<BusinessRule> rules) {
 		// TODO Auto-generated method stub
-		
-	}
+        for(BusinessRule b : rules){
+            String dbType = "Oracle";
+            Generate g = new GenerateFactory(dbType);
+            String sql = g.generateCode(b);
+        }
+    }
 
 	@Override
 	public void generateTrigger(BusinessRule br) {

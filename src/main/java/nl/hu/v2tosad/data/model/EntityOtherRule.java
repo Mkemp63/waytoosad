@@ -22,7 +22,10 @@ public class EntityOtherRule extends BusinessRule {
                 ", plSqlCode='" + plSqlCode + '\'' +
                 '}'+'}';
     }
-	/*public String GenerateCode() {
-		
-	}*/
+    public String generateCode(String dbType){
+       /* Generate g = new GenerateFactory(dbType);
+        return g.generateEntityOtherRule();*/
+        //id,status,dateModified, code, businessRuleType, rule_Name, discription, tableName, otherRuleId, columnName, plSqlCode
+        return null;
+    }
 }
