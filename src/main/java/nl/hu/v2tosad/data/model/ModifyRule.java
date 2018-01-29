@@ -6,7 +6,7 @@ public class ModifyRule extends BusinessRule{
 
 	
 	public ModifyRule(BusinessRule br, int modifyRuleId, String plSqlCode) {
-		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
+		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName, br.schemaID);
 		this.modifyRuleId = modifyRuleId;
 		this.plSqlCode = plSqlCode;
 	}

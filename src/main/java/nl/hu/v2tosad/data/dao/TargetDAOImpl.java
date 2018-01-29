@@ -1,9 +1,9 @@
 package nl.hu.v2tosad.data.dao;
 
+import nl.hu.v2tosad.data.generator.Generator;
+import nl.hu.v2tosad.data.generator.GeneratorFactory;
 import nl.hu.v2tosad.data.model.BusinessRule;
 import nl.hu.v2tosad.data.model.Database;
-import nl.hu.v2tosad.data.model.Generate;
-import nl.hu.v2tosad.data.model.GenerateFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -57,7 +57,7 @@ public class TargetDAOImpl implements TargetDAO {
         for (BusinessRule b : rules) {
             System.out.println("targetDAOimpl input = " + b);
             String dbType = "Oracle";
-            Generate g = GenerateFactory.doGenerate(dbType);
+            Generator g = GeneratorFactory.getGenerator(dbType);
             String sql = g.generateCode(b);
             System.out.println(sql);
 

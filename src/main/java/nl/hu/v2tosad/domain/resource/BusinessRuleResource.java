@@ -61,8 +61,7 @@ public class BusinessRuleResource {
     @POST
     @Path("/rules")
    /* @Produces("application/json")*/
-    public /*String*/ void generateRule(InputStream is) {
-        RepositoryDAO dao = new RepositoryDAO();
+    public /*String*/ void generateRules(InputStream is) {
         ArrayList<Integer> rulelist = new ArrayList<Integer>();
         System.out.println(is);
         JsonObject object = Json.createReader(is).readObject();
@@ -76,7 +75,7 @@ public class BusinessRuleResource {
         }
 
         System.out.println(rulelist);
-        service.StartGenerating(rulelist);
+        service.startGenerating(rulelist);
 
         /*JsonArrayBuilder jab = Json.createArrayBuilder();*/
         /*ArrayList<BusinessRule> brs = service.getBusinessRule(rulelist);

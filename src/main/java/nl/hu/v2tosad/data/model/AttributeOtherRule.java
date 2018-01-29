@@ -7,7 +7,7 @@ public class AttributeOtherRule extends BusinessRule{
 
 	
 	public AttributeOtherRule(BusinessRule br, int otherRuleId, String columnName, String plSqlCode) {
-		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
+		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName, br.schemaID);
 		this.otherRuleId = otherRuleId;
 		this.columnName = columnName;
 		this.plSqlCode = plSqlCode;

@@ -1,5 +1,8 @@
 package nl.hu.v2tosad.data.model;
 
+import nl.hu.v2tosad.data.generator.Generator;
+import nl.hu.v2tosad.data.generator.GeneratorFactory;
+
 //POJO
 public class AttributeCompareRule extends BusinessRule{
 	private int compareRuleId;
@@ -10,7 +13,7 @@ public class AttributeCompareRule extends BusinessRule{
 
 
 	public AttributeCompareRule(BusinessRule br, int compareRuleId, String compareName, String compareValue, String operator, String column) {
-		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
+		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName, br.schemaID);
 		this.compareRuleId = compareRuleId;
 		this.compareName = compareName;
 		this.compareValue = compareValue;
@@ -19,9 +22,8 @@ public class AttributeCompareRule extends BusinessRule{
 	}
 
     public String generateCode(String dbType){
-/*        Generate g = new GenerateFactory(dbType);
-        return g.generateAttributeCompareRule();*/
-        return null;
+    	Generator gen = GeneratorFactory.getGenerator(dbType);
+    	return gen.generateAttributeCompareRule(this);
     }
 
 	public int getCompareRuleId() {

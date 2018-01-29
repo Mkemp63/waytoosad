@@ -1,11 +1,10 @@
-package nl.hu.v2tosad.data.model;
+package nl.hu.v2tosad.data.generator;
 
-public class GenerateFactory {
-    public static Generate doGenerate(String dbType){
-        Generate g = null;
+public class GeneratorFactory {
+    public static Generator getGenerator(String dbType){
+        Generator g = null;
         if (dbType==("Oracle")){
-            System.out.println("db Type = oracle");
-            return new GenerateImplOracle();
+            return new OracleGenerator();
         } /*else
         if (dbType.equals("Postgres")){
             return new RocketEnemyShip();
