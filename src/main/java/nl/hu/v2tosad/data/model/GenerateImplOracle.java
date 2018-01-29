@@ -112,7 +112,7 @@ public String generateInterEntityCompareRule(InterEntityCompareRule i) {
 	result2.append("\nthen v_result := 'NOT EQUAL'; \nend");
 	result2.append("\n if " + i.getOperator() + " != v_result then");
 	result2.append("\nraise_application_error(-20000," + i.getCode() + " description: " + i.getDiscription() + " violated)");
-	result2.append("\nend if; \nend" + i.getCode() + ";");
+	result2.append("\nend if; \nend " + i.getCode() + ";");
 	result.append("\n" + result2.toString());
 	return result.toString();
 }
