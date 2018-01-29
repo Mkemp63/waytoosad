@@ -33,7 +33,7 @@ public class AttributeRangeRule extends BusinessRule{
 		this.rangeRuleId = rangeRuleId;
 	}
 
-	public int getMinval() {
+	public int getMinVal() {
 		return minVal;
 	}
 
@@ -41,7 +41,7 @@ public class AttributeRangeRule extends BusinessRule{
 		this.minVal = minVal;
 	}
 
-	public int getMaxval() {
+	public int getMaxVal() {
 		return maxVal;
 	}
 
@@ -64,6 +64,4 @@ public class AttributeRangeRule extends BusinessRule{
 	public void setColumn(String column) {
 		this.column = column;
 	}
-	
-
 }
