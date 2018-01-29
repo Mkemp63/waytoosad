@@ -18,7 +18,7 @@ public class GenerateImplOracle implements Generate{
         System.out.println("AttributeCompareRule in = " +c);
         StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + c.tableName);
         result.append(" add constraint " + c.code);
-        result.append("check (" + c.getColumn() + c.getOperator() + c.getCompareValue() );
+        result.append("check (" + c.getColumn() +" " + c.getOperator() +" "+  c.getCompareValue() );
         result.append(")");
         System.out.println(result.toString());
         return result.toString();
