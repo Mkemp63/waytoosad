@@ -12,9 +12,7 @@ public class BusinessRule {
 	protected String discription;
 	protected String tableName;
 	
-	public BusinessRule() {
-	
-	}
+
 	public BusinessRule(int id, String status, Date dateModified, String code, String businessRuleType, String rule_Name, String discription, String tableName) {
 		this.id = id;
 		this.status = status;

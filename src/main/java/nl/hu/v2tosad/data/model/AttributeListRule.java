@@ -8,10 +8,7 @@ public class AttributeListRule extends BusinessRule{
 	private String operator;
 	private ArrayList<String> compareValue = new ArrayList<String>();
 	private String listTable;
-	
-	public AttributeListRule() {
-		
-	}
+
 	
 	public AttributeListRule(BusinessRule br, int listRuleId, String column, String operator, String listTable) {
 		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);

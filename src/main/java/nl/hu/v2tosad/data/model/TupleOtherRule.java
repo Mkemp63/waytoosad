@@ -5,9 +5,6 @@ public class TupleOtherRule extends BusinessRule{
 	private String columnName;
 	private String plSqlCode;
 	
-	public TupleOtherRule() {
-		
-	}
 	
 	public TupleOtherRule(BusinessRule br, int otherRuleId, String columnName, String plSqlCode) {
 		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);

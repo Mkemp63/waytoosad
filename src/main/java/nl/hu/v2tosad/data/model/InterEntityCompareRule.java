@@ -6,11 +6,6 @@ public class InterEntityCompareRule extends BusinessRule{
 	private String tableName2;
 	private String columnName2;
 	private String operator;
-	
-	public InterEntityCompareRule() {
-		
-	}
-
 
 
     public InterEntityCompareRule(BusinessRule br, int interEntityCompareRuleId, String columnName, String tableName2, String columnName2, String operator) {

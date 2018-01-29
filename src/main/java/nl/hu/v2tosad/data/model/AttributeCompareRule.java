@@ -7,11 +7,8 @@ public class AttributeCompareRule extends BusinessRule{
 	private String compareValue;
 	private String operator;
 	private String column;
-	
-	public AttributeCompareRule() {
-		
-	}
-	
+
+
 	public AttributeCompareRule(BusinessRule br, int compareRuleId, String compareName, String compareValue, String operator, String column) {
 		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
 		this.compareRuleId = compareRuleId;
