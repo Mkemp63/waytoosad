@@ -4,6 +4,7 @@ public class GenerateFactory {
     public static Generate doGenerate(String dbType){
         Generate g = null;
         if (dbType==("Oracle")){
+            System.out.println("db Type = oracle");
             return new GenerateImplOracle();
         } /*else
         if (dbType.equals("Postgres")){

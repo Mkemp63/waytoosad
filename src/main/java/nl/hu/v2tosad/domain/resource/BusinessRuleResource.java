@@ -1,14 +1,14 @@
 package nl.hu.v2tosad.domain.resource;
 
 import nl.hu.v2tosad.data.dao.RepositoryDAO;
-import nl.hu.v2tosad.data.model.BusinessRule;
 import nl.hu.v2tosad.domain.provider.ServiceProvider;
 import nl.hu.v2tosad.domain.service.BusinessRuleService;
 
-import javax.json.*;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -60,8 +60,8 @@ public class BusinessRuleResource {
 
     @POST
     @Path("/rules")
-    @Produces("application/json")
-    public String generateRule(InputStream is) {
+   /* @Produces("application/json")*/
+    public /*String*/ void generateRule(InputStream is) {
         RepositoryDAO dao = new RepositoryDAO();
         ArrayList<Integer> rulelist = new ArrayList<Integer>();
         System.out.println(is);
@@ -78,8 +78,8 @@ public class BusinessRuleResource {
         System.out.println(rulelist);
         service.StartGenerating(rulelist);
 
-        JsonArrayBuilder jab = Json.createArrayBuilder();
-        ArrayList<BusinessRule> brs = service.getBusinessRule(rulelist);
+        /*JsonArrayBuilder jab = Json.createArrayBuilder();*/
+        /*ArrayList<BusinessRule> brs = service.getBusinessRule(rulelist);
         for (BusinessRule b : brs) {
 
 
@@ -89,7 +89,7 @@ public class BusinessRuleResource {
             jab.add(job);
         }
         JsonArray array = jab.build();
-        return array.toString();
+        return array.toString();*/
     }
 }
 

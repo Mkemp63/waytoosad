@@ -5,45 +5,57 @@ import nl.hu.v2tosad.data.model.Generate;
 import nl.hu.v2tosad.data.model.GenerateFactory;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 // implements generated code in target db
 public class TargetDAOImpl implements TargetDAO {
-	private String schemaName;
-	private String DB_DRIV;
-	private String DB_URL;
-	private String DB_USER;
-	private String DB_PASS;
-	
-	public TargetDAOImpl(String schemaName, String DB_URL, String DB_USER, String DB_PASS) {
-		this.schemaName = schemaName;
-		this.DB_URL = DB_URL;
-		this.DB_USER = DB_USER;
-		this.DB_PASS = DB_PASS;
-	}
+    private Connection conn;
+    private static final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
+    private static final String DB_URL = "jdbc:oracle:thin:@ondora02.hu.nl:8521/cursus02.hu.nl";
+    private static final String DB_USER = "tosad_2017_2b_team2_target";
+    private static final String DB_PASS = "tosad_2017_2b_team2_target";
 
-	@Override
-	public void generateRules(ArrayList<BusinessRule> rules) {
-		// TODO Auto-generated method stub
-        for(BusinessRule b : rules){
-            String dbType = "Oracle";
-            Generate g =  GenerateFactory.doGenerate(dbType);
-            String sql = g.generateCode(b);
+    public TargetDAOImpl() {
+        try {
+            Class.forName(DB_DRIV).newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+            e1.printStackTrace();
+        }
+        getConnection();
+    }
+
+    public final Connection getConnection() {
+        try {
+            this.conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            return conn;
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
     }
 
-/*	@Override
-	public void generateTrigger(BusinessRule br) {
-		// TODO Auto-generated method stub
-		
-	}*/
+    public void closeConnection() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
-	@Override
-	public Connection getConnection() {
-		if (this.schemaName.equals("Oracle")) {
-			this.DB_DRIV = "oracle.jdbc.driver.OracleDriver";
-		}
-		return null;
-	}
+    @Override
+    public void generateRules(ArrayList<BusinessRule> rules) {
+        // TODO Auto-generated method stub
+        for (BusinessRule b : rules) {
+            String dbType = "Oracle";
+            Generate g = GenerateFactory.doGenerate(dbType);
+            String sql = g.generateCode(b);
+            System.out.println(sql);
 
+            //zet in db
+        }
+        closeConnection();
+    }
 }
+
+

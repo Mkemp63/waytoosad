@@ -69,23 +69,27 @@ public class RepositoryDAO {
                 }
 
                 if (br.getBusinessRuleType().equals("Attribute Range Rule")) {
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM RANGE_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
                     while (rs.next()) {
                         br = new AttributeRangeRule(br, rs.getInt("RANGERULE_ID"), rs.getInt("MINVAL"), rs.getInt("MAXVAL"), rs.getString("OPERATORVALUE"), rs.getString("COLUMNNAME"));
                     }
 
                 } else if (br.getBusinessRuleType().equals("Attribute Compare Rule")) {
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM COMPARE_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
                     while (rs.next()) {
                         br = new AttributeCompareRule(br, rs.getInt("COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("COMPAREVALUE"), rs.getString("OPERATORVALUE"), rs.getString("COLUMNNAME"));
                     }
                 } else if (br.getBusinessRuleType().equals("Attribute List Rule")) {
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM LIST_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
                     int list_id = 0;
                     while (rs.next()) {
                         br = new AttributeListRule(br, rs.getInt("LIST_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("OPERATORVALUE"), rs.getString("table2"));
                         list_id = rs.getInt("LIST_RULE_ID");
                     }
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM LIST_RULE_VALUE WHERE ID = " + list_id);
 
                     //Parse BusinessRule object naar een AttributeListRule zodat de functies gebruikt kunnen worden van de AttributeListRule klasse
@@ -99,31 +103,37 @@ public class RepositoryDAO {
                     //Hier wordt de Parse weer teruggezet.
                     br = attlr;
                 } else if (br.getBusinessRuleType().equals("Inter-Entity Compare Rule")) {
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM inter_entity_compare_rule WHERE fk_businessrule_id =" + br.getId());
                     while (rs.next()) {
                         br = new InterEntityCompareRule(br, rs.getInt("INTER_ENTITY_COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("TABLENAME2"), rs.getString("COLUMN2"), rs.getString("OPERATOR"));
                     }
                 } else if (br.getBusinessRuleType().equals("Entity Other Rule")) {
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM other_rule WHERE fk_businessrule_id =" + br.getId());
                     while (rs.next()) {
                         br = new EntityOtherRule(br, rs.getInt("OTHER_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("PLSQLCODE"));
                     }
                 } else if (br.getBusinessRuleType().equals("Modify Rule")) {
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM modify_rule WHERE fk_businessrule_id =" + br.getId());
                     while (rs.next()) {
                         br = new ModifyRule(br, rs.getInt("MODIFY_RULE_ID"), rs.getString("PLSQLCODE"));
                     }
                 } else if (br.getBusinessRuleType().equals("Tuple Other Rule")) {
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM other_rule WHERE fk_businessrule_id =" + br.getId());
                     while (rs.next()) {
                         br = new ModifyRule(br, rs.getInt("OTHER_RULE_ID"), rs.getString("PLSQLCODE"));
                     }
                 } else if (br.getBusinessRuleType().equals("Tuple Compare Rule")) {
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM compare_rule WHERE fk_businessrule_id =" + br.getId());
                     while (rs.next()) {
                         br = new TupleCompareRule(br, rs.getInt("COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("COMPAREVALUE"), rs.getString("OPERATORVALUE"));
                     }
                 } else if (br.getBusinessRuleType().equals("Attribute Other Rule")) {
+                    rs.close();
                     rs = stmt.executeQuery("SELECT * FROM other_rule WHERE fk_businessrule_id =" + br.getId());
                     while (rs.next()) {
                         br = new AttributeOtherRule(br, rs.getInt("OHTER_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("PLSQLCODE"));
@@ -137,7 +147,7 @@ public class RepositoryDAO {
 //			}
 
                 rs.close();
-
+                stmt.close();
             } catch (SQLException sqle) {
                 sqle.printStackTrace();
             }
@@ -146,6 +156,12 @@ public class RepositoryDAO {
         return rules;
 
 	}
-	
 
+    public void closeConnection() {
+	    try{
+        conn.close();
+
+	    }catch (SQLException e){System.out.println(e);}
+    }
 }
+

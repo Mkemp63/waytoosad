@@ -21,18 +21,22 @@ public class BusinessRuleService implements ApplicationService {
 		this.target.generateConstraint(br);
 	}*/
 	
-	public void addTargetSchema(String dbName, String DB_URL, String DB_USER, String DB_PASS) {
-		this.target = new TargetDAOImpl(dbName, DB_URL, DB_USER, DB_PASS);
+	public void addTargetSchema() {
+		this.target = new TargetDAOImpl();
 	}
 
-	public ArrayList<BusinessRule> getBusinessRule(ArrayList<Integer> id) {
-        return repo.getBusinessRules(id);
+	public ArrayList<BusinessRule> getBusinessRule(ArrayList<Integer> idList) {
+        return repo.getBusinessRules(idList);
     }
 
     public void StartGenerating(ArrayList<Integer> rulelist) {
-
+        System.out.println("Start generating rules");
         ArrayList<BusinessRule> rules = repo.getBusinessRules(rulelist);
+        System.out.println(rules);
+        repo.closeConnection();
+        addTargetSchema();
 
+        target.generateRules(rules);
 
     }
 }

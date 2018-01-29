@@ -11,5 +11,6 @@ public interface TargetDAO {
 	
 
 	public abstract Connection getConnection();
+	public void closeConnection();
 
 }

@@ -6,6 +6,7 @@ public class GenerateImplOracle implements Generate{
         String type = b.getBusinessRuleType();
         if (b instanceof AttributeCompareRule){
             AttributeCompareRule c = (AttributeCompareRule) b;
+            System.out.println(c);
             return generateAttributeCompareRule(c);
 
         }else {return "";}
