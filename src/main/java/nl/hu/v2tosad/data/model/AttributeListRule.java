@@ -31,4 +31,16 @@ public class AttributeListRule extends BusinessRule{
 		this.compareValue.remove(item);
 	}
 
+	public String getColumn() {
+		return column;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public ArrayList<String> getCompareValue() {
+		return compareValue;
+	}
+
 }

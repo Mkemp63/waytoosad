@@ -3,13 +3,13 @@ package nl.hu.v2tosad.data.model;
 public interface Generate {
     public String generateCode(BusinessRule b);
     public String generateAttributeCompareRule(AttributeCompareRule c);
-/*    public String generateAttributeListRule();
-    public String generateAttributeOtherRule();
+    public String generateAttributeListRule(AttributeListRule r);
     public String generateAttributeRangeRule();
-    public String generateEntityOtherRule();
     public String generateInterEntityCompareRule();
-    public String generateModifyRule();
     public String generateTupleCompareRule();
+/*  public String generateAttributeOtherRule();
+    public String generateEntityOtherRule();
+    public String generateModifyRule();
     public String generateTupleOtherRule();*/
 
 }
