@@ -13,10 +13,6 @@ import java.util.ArrayList;
 // implements generated code in target db
 public class TargetDAOImpl implements TargetDAO {
     private Connection conn;
-/*    private static final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_URL = "jdbc:oracle:thin:@ondora02.hu.nl:8521/cursus02.hu.nl";
-    private static final String DB_USER = "tosad_2017_2b_team2_target";
-    private static final String DB_PASS = "tosad_2017_2b_team2_target";*/
 
     private String schemaName;
  	private String DB_DRIV;

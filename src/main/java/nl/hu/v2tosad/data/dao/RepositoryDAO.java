@@ -170,6 +170,7 @@ public class RepositoryDAO {
                 String pass = rs.getString("db_pass");
                 String driv = rs.getString("db_driv");
                 db = new Database(name, type, url, user, pass, driv);
+                System.out.println(db);
             }
             rs.close();
             stmt.close();

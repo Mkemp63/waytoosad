@@ -40,4 +40,16 @@ public class Database {
     public String getDb_driv() {
         return db_driv;
     }
+
+    @Override
+    public String toString() {
+        return "Database{" +
+                "name='" + name + '\'' +
+                ", db_type='" + db_type + '\'' +
+                ", db_url='" + db_url + '\'' +
+                ", db_user='" + db_user + '\'' +
+                ", db_pass='" + db_pass + '\'' +
+                ", db_driv='" + db_driv + '\'' +
+                '}';
+    }
 }
