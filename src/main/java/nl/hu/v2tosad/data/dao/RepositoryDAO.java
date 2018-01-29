@@ -74,13 +74,13 @@ public class RepositoryDAO {
 			} else if (br.getBusinessRuleType().equals("Attribute Compare Rule")) {
 				rs = stmt.executeQuery("SELECT * FROM COMPARE_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
 				while(rs.next()) {
-					br = new AttributeCompareRule(br, rs.getInt("COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("COMPAREVALUE"), rs.getString("OPERATORVALUE"));
+					br = new AttributeCompareRule(br, rs.getInt("COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("COMPAREVALUE"), rs.getString("OPERATORVALUE"), rs.getString("COLUMNNAME"));
 				}
 			} else if (br.getBusinessRuleType().equals("Attribute List Rule")) {
 				rs = stmt.executeQuery("SELECT * FROM LIST_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
 				int list_id = 0;
 				while(rs.next()) {
-					br = new AttributeListRule(br, rs.getInt("LIST_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("OPERATORVALUE"));
+					br = new AttributeListRule(br, rs.getInt("LIST_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("OPERATORVALUE"),  rs.getString("table2"));
 					list_id = rs.getInt("LIST_RULE_ID");
 				}
 				rs = stmt.executeQuery("SELECT * FROM LIST_RULE_VALUE WHERE ID = " + list_id);

@@ -21,10 +21,16 @@ public class AttributeListRule extends BusinessRule{
 	public String generateCode() {
 		StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + super.getTableName());
 		result.append(" add constraint " + super.getCode());
-		result.append("check (" + column + " " + operator + " " + compareValue);
-		result.append(" from " + listTable);
-		result.append(" where FK_LIST_RULE_ID = " + listRuleId);
-		result.append(");");
+		result.append("check (" + column + " " + operator + "(" + compareValue);
+		for (String s : compareValue) {
+			if (compareValue.indexOf(s) == 0) {
+				result.append("'" + s + "'");
+			}
+			else { 
+				result.append(", '" + s + "'");
+			}
+		}
+		result.append("))");
 		System.out.println(result.toString());
 		return result.toString();
 	}

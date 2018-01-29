@@ -19,7 +19,7 @@ public class TupleCompareRule extends BusinessRule{
 		StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + super.getTableName());
 		result.append(" add constraint " + super.getCode());
 		result.append("check (" + column + operator + compareColumn);
-		result.append(");");
+		result.append(")");
 		System.out.println(result.toString());
 		return result.toString();
 	}

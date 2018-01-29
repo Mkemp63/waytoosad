@@ -24,7 +24,7 @@ public class AttributeRangeRule extends BusinessRule{
 		result.append(" add constraint " + super.getCode());
 		result.append("check (" + column + " " + operator + " " + minVal);
 		result.append(" and " + maxVal);
-		result.append(");");
+		result.append(")");
 		System.out.println(result.toString());
 		return result.toString();
 	}
