@@ -20,4 +20,16 @@ public class TupleCompareRule extends BusinessRule{
         return g.generateTupleCompareRule();*/
         return null;
     }
+
+	public String getColumn() {
+		return column;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public String getCompareColumn() {
+		return compareColumn;
+	}
 }

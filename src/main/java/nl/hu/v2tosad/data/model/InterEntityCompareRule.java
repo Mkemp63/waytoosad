@@ -33,4 +33,20 @@ public class InterEntityCompareRule extends BusinessRule{
                 ", operator='" + operator + '\'' +
                 '}'+'}';
     }
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public String getColumnName() {
+		return columnName;
+	}
+
+	public String getTableName2() {
+		return tableName2;
+	}
+
+	public String getColumnName2() {
+		return columnName2;
+	}
 }
