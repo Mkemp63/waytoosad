@@ -27,16 +27,16 @@ public class TargetDAOImpl implements TargetDAO {
 		// TODO Auto-generated method stub
         for(BusinessRule b : rules){
             String dbType = "Oracle";
-            Generate g = new GenerateFactory(dbType);
+            Generate g =  GenerateFactory.doGenerate(dbType);
             String sql = g.generateCode(b);
         }
     }
 
-	@Override
+/*	@Override
 	public void generateTrigger(BusinessRule br) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 	@Override
 	public Connection getConnection() {
