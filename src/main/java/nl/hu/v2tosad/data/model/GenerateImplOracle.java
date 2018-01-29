@@ -4,9 +4,10 @@ public class GenerateImplOracle implements Generate{
 
     public String generateCode(BusinessRule b){
         String type = b.getBusinessRuleType();
+        System.out.println("generateImplOracle generate code input= " +b);
         if (b instanceof AttributeCompareRule){
             AttributeCompareRule c = (AttributeCompareRule) b;
-            System.out.println(c);
+            System.out.println("generate instanceof = "+c);
             return generateAttributeCompareRule(c);
 
         }else {return "";}
@@ -14,6 +15,7 @@ public class GenerateImplOracle implements Generate{
 
     @Override
     public String generateAttributeCompareRule(AttributeCompareRule c) {
+        System.out.println("AttributeCompareRule in = " +c);
         StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + c.tableName);
         result.append(" add constraint " + c.code);
         result.append("check (" + c.getColumn() + c.getOperator() + c.getCompareValue() );

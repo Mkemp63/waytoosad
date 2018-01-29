@@ -47,6 +47,7 @@ public class TargetDAOImpl implements TargetDAO {
     public void generateRules(ArrayList<BusinessRule> rules) {
         // TODO Auto-generated method stub
         for (BusinessRule b : rules) {
+            System.out.println("targetDAOimpl input = " + b);
             String dbType = "Oracle";
             Generate g = GenerateFactory.doGenerate(dbType);
             String sql = g.generateCode(b);
