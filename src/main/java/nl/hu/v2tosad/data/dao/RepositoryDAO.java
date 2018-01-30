@@ -210,12 +210,13 @@ public class RepositoryDAO {
 //	    }catch (SQLException e){System.out.println(e);}
 //    }
 //
-//    public void setStatus(String status, int id ) {
-//        try (Statement stmt = conn.createStatement()) {
-//            stmt.executeUpdate("UPDATE businessrules set status =" + status + " , where id =" + id+" ;");
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//    }
+    public void setRuleStatus(String status, int id ) {
+        try (Connection conn = this.getConnection()) {
+        	Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE BUSINESSRULE set STATUS = '" + status + "' where id = " + id);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();;
+        }
+    }
 }
 

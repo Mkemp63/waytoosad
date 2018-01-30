@@ -8,6 +8,7 @@ import nl.hu.v2tosad.data.model.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 // implements generated code in target db
@@ -72,7 +73,7 @@ public class TargetDAOImpl implements TargetDAO {
             return "not implemented";
         }else{
             // todo set sql in target db
-            return "implemented in target database";
+            return "implemented";
         }
     }
 }
