@@ -33,7 +33,7 @@ public class TargetDAOImpl implements TargetDAO {
         }
         getConnection();
     }
-
+    @Override
     public final Connection getConnection() {
         try {
             this.conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
@@ -42,7 +42,7 @@ public class TargetDAOImpl implements TargetDAO {
             throw new RuntimeException(ex);
         }
     }
-
+    @Override
     public void closeConnection() {
         try {
             conn.close();
@@ -52,7 +52,7 @@ public class TargetDAOImpl implements TargetDAO {
     }
 
     @Override
-    public void generateRules(ArrayList<BusinessRule> rules) {
+    public void generateRules(ArrayList<BusinessRule> rules, RepositoryDAO repo) {
         // TODO Auto-generated method stub
         for (BusinessRule b : rules) {
             System.out.println("targetDAOimpl input = " + b);
@@ -61,9 +61,19 @@ public class TargetDAOImpl implements TargetDAO {
             String sql = g.generateCode(b);
             System.out.println(sql);
 
+            repo.setStatus(implementRule(sql), b.getId());
             //zet in db
         }
         closeConnection();
+    }
+    @Override
+    public String implementRule(String sql){
+        if(sql.equals("not implemented")){
+            return "not implemented";
+        }else{
+            // todo set sql in target db
+            return "implemented in target database";
+        }
     }
 }
 

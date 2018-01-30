@@ -7,7 +7,7 @@ public class GenerateImplOracle implements Generate{
         System.out.println("generateImplOracle generate code input= " +b);
         if (b instanceof AttributeCompareRule) {
             AttributeCompareRule c = (AttributeCompareRule) b;
-            System.out.println("generate instanceof = " + c);
+            /*System.out.println("generate instanceof = " + c);*/
             return generateAttributeCompareRule(c);
         }else if(b instanceof AttributeListRule ) {
             AttributeListRule c = (AttributeListRule) b;
@@ -43,7 +43,7 @@ public class GenerateImplOracle implements Generate{
         result.append(" add constraint " + c.code);
         result.append("check (" + c.getColumn() + c.getOperator() + c.getCompareValue() );
         result.append(")");
-        System.out.println(result.toString());
+      //System.out.println(result.toString());
         return result.toString();
     }
 

@@ -31,11 +31,11 @@ public class BusinessRuleService implements ApplicationService {
         ArrayList<BusinessRule> rules = repo.getBusinessRules(rulelist);
         System.out.println(rules);
         Database db = repo.getTarget();
-        repo.closeConnection();
+
 
         addTargetSchema(db);
 
         target.generateRules(rules);
-
+        repo.closeConnection();
     }
 }
