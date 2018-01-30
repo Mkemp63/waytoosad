@@ -1,4 +1,8 @@
 package nl.hu.v2tosad.data.model;
+
+import nl.hu.v2tosad.data.generator.Generator;
+import nl.hu.v2tosad.data.generator.GeneratorFactory;
+
 //POJO
 public class TupleCompareRule extends BusinessRule{
 	private int compareRuleId;
@@ -16,9 +20,8 @@ public class TupleCompareRule extends BusinessRule{
 	}
 
     public String generateCode(String dbType){
-     /*   Generate g = new GenerateFactory(dbType);
-        return g.generateTupleCompareRule();*/
-        return null;
+    	Generator gen = GeneratorFactory.getGenerator(dbType);
+        return gen.generateTupleCompareRule(this);
     }
 
 	public String getColumn() {

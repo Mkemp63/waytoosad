@@ -117,10 +117,10 @@ public class OracleGenerator implements Generator{
 
     @Override
     public String generateTupleCompareRule(TupleCompareRule t) {
-        StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + t.getTableName());
+        StringBuilder result = new StringBuilder("alter table " + t.getTableName());
         result.append(" add constraint " + t.getCode());
-        result.append(" check (" + t.getColumn() + " " + t.getOperator() + " TOSAD_2017_2B_TEAM2_TARGET." + t.getCompareColumn());
-        result.append(")");
+        result.append(" check (" + t.getColumn() + " " + t.getOperator() + " " + t.getCompareColumn());
+        result.append(")NOVALIDATE");
         return result.toString();
     }
 
