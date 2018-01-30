@@ -105,9 +105,9 @@ public class RepositoryDAO {
                     br = attlr;
                 } else if (br.getBusinessRuleType().equals("Inter-Entity Compare Rule")) {
                     rs.close();
-                    rs = stmt.executeQuery("SELECT * FROM inter_entity_compare_rule WHERE fk_businessrule_id =" + br.getId());
+                    rs = stmt.executeQuery("SELECT * FROM INTER_ENTITIY_COMPARE_RULE WHERE FK_BUSINESSRULE_ID =" + br.getId());
                     while (rs.next()) {
-                        br = new InterEntityCompareRule(br, rs.getInt("INTER_ENTITY_COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("TABLENAME2"), rs.getString("COLUMN2"), rs.getString("OPERATOR"), rs.getString("AFK"));
+                        br = new InterEntityCompareRule(br, rs.getInt("INTER_ENTITIY_COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("TABLENAME2"), rs.getString("COLUMN2"), rs.getString("OPERATORVALUE"), rs.getString("AFK"));
                     }
                 } else if (br.getBusinessRuleType().equals("Entity Other Rule")) {
                     rs.close();

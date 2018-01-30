@@ -25,7 +25,6 @@ public class InterEntityCompareRule extends BusinessRule{
 
 	public String generateCode(String dbType){
 		Generator gen = GeneratorFactory.getGenerator(dbType);
-		
         return gen.generateInterEntityCompareRule(this);
     }
 

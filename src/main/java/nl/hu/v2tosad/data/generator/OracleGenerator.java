@@ -92,7 +92,7 @@ public class OracleGenerator implements Generator{
    	result.append("\nend if; \nend " + i.getCode() + i.getTableName() + ";");
    	
    	StringBuilder result2 = new StringBuilder("\ncreate or replace trigger " + i.getCode() + i.getTableName2());
-   	result2.append("\nbefore insert or update on TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName());
+   	result2.append("\nbefore insert or update on TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
    	result2.append("\nfor each row \ndeclare \nv_column1 varchar2(400); \nv_column2 varchar2(400); \nbegin");
    	result2.append("\nselect " +i.getColumnName() + " into v_column1 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ";");
    	result2.append("\nselect " +i.getColumnName2() + " into v_column2 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
