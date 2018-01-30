@@ -18,5 +18,4 @@ public interface Generator {
     public String generateEntityOtherRule();
     public String generateModifyRule();
     public String generateTupleOtherRule();*/
-
 }

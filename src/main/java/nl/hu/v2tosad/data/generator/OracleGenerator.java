@@ -81,27 +81,38 @@ public class OracleGenerator implements Generator{
 
    @Override
    public String generateInterEntityCompareRule(InterEntityCompareRule i) {
-   	StringBuilder result = new StringBuilder("create or replace trigger " + i.getCode() + i.getTableName());
-   	result.append("\nbefore insert or update on TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName());
-   	result.append("\nfor each row \ndeclare \nv_column1 varchar2(400); \nv_column2 varchar2(400); \nbegin");
-   	result.append("\nselect " +i.getColumnName() + " into v_column1 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ";");
-   	result.append("\nselect " +i.getColumnName2() + " into v_column2 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
-   	result.append("\nwhere (select ID from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ") = " + i.getAfk() + "_ID;");
-   	result.append("\n if v_column1 " + i.getOperator() + " v_column2 then null;");
-   	result.append("\nelse \nraise_application_error(-20000,'" + i.getCode() + " description: " + i.getDiscription() + " violated');");
-   	result.append("\nend if; \nend " + i.getCode() + i.getTableName() + ";");
-   	
-   	StringBuilder result2 = new StringBuilder("\ncreate or replace trigger " + i.getCode() + i.getTableName2());
-   	result2.append("\nbefore insert or update on TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
-   	result2.append("\nfor each row \ndeclare \nv_column1 varchar2(400); \nv_column2 varchar2(400); \nbegin");
-   	result2.append("\nselect " +i.getColumnName() + " into v_column1 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ";");
-   	result2.append("\nselect " +i.getColumnName2() + " into v_column2 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
-   	result2.append("\nwhere (select ID from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ") = " + i.getAfk() + "_ID;");
-   	result2.append("\n if v_column1 " + i.getOperator() + " v_column2 then null;");
-   	result2.append("\nelse \nraise_application_error(-20000,'" + i.getCode() + " description: " + i.getDiscription() + " violated');");
-   	result2.append("\nend if; \nend " + i.getCode() + i.getTableName2() + ";");
-   	result.append("\n" + result2.toString());
-   	return result.toString();
+//   	StringBuilder result = new StringBuilder("create or replace trigger " + i.getCode() + i.getTableName());
+//   	result.append("\nbefore insert or update on TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName());
+//   	result.append("\nfor each row \ndeclare \nv_column1 varchar2(400); \nv_column2 varchar2(400); \nbegin");
+//   	result.append("\nselect " +i.getColumnName() + " into v_column1 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ";");
+//   	result.append("\nselect " +i.getColumnName2() + " into v_column2 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
+//   	result.append("\nwhere (select ID from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ") = " + i.getAfk() + "_ID;");
+//   	result.append("\n if v_column1 " + i.getOperator() + " v_column2 then null;");
+//   	result.append("\nelse \nraise_application_error(-20000,'" + i.getCode() + " description: " + i.getDiscription() + " violated');");
+//   	result.append("\nend if; \nend " + i.getCode() + i.getTableName() + ";");
+//   	
+//   	StringBuilder result2 = new StringBuilder("\ncreate or replace trigger " + i.getCode() + i.getTableName2());
+//   	result2.append("\nbefore insert or update on TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
+//   	result2.append("\nfor each row \ndeclare \nv_column1 varchar2(400); \nv_column2 varchar2(400); \nbegin");
+//   	result2.append("\nselect " +i.getColumnName() + " into v_column1 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ";");
+//   	result2.append("\nselect " +i.getColumnName2() + " into v_column2 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
+//   	result2.append("\nwhere (select ID from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ") = " + i.getAfk() + "_ID;");
+//   	result2.append("\n if v_column1 " + i.getOperator() + " v_column2 then null;");
+//   	result2.append("\nelse \nraise_application_error(-20000,'" + i.getCode() + " description: " + i.getDiscription() + " violated');");
+//   	result2.append("\nend if; \nend " + i.getCode() + i.getTableName2() + ";");
+//   	result.append("\n" + result2.toString());
+//   	return result.toString();
+	   StringBuilder result = new StringBuilder("create or replace trigger " + i.getCode() + "_" + i.getTableName());
+	   result.append("\nbefore insert or update on " + i.getTableName());
+	   result.append("\nfor each row");
+	   result.append("\ndeclare");
+	   result.append("\nv_column " + i.getTableName2() + "." + i.getColumnName2() + "%type;");
+	   result.append("\nbegin");
+	   result.append("\nSELECT " + i.getColumnName2() + " into v_column \n from " + i.getTableName2() + "\n where id = :new." + i.getAfk() + "_ID;");
+	   result.append("\nif :new." + i.getColumnName() + " " + i.getOperator() + " v_column THEN");
+	   result.append("\nraise_application_error(-20000, '" + i.getCode() + " description: " + i.getDiscription() + " IS VIOLATED');");
+	   result.append("\nEND IF;\nEND");
+	   return result.toString();
    }
 
     @Override

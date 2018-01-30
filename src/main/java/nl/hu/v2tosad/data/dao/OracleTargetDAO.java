@@ -31,15 +31,14 @@ public class OracleTargetDAO implements TargetDAO{
 	public void generateRules(ArrayList<BusinessRule> rules) {
 		try(Connection conn = getConnection()) {
 			Statement stmt = conn.createStatement();
-			int i = 0;
 			
 			for(BusinessRule br : rules) {
 				String sql = br.generateCode("Oracle");
 				System.out.println("Dit is de SQL-code: ");
 				System.out.println(sql);
-				this.updateAffected(br.getId());
+//				stmt.executeQuery(sql);
 			}
-			System.out.println(i);
+			
 			stmt.close();
 			conn.close();
 				
