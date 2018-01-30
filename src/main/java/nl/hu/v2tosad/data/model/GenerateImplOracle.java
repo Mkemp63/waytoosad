@@ -1,9 +1,10 @@
 package nl.hu.v2tosad.data.model;
 
-public class GenerateImplOracle implements Generate{
+import nl.hu.v2tosad.data.generator.Generator;
+
+public class GenerateImplOracle implements Generator{
 
     public String generateCode(BusinessRule b){
-        String type = b.getBusinessRuleType();
         System.out.println("generateImplOracle generate code input= " +b);
         if (b instanceof AttributeCompareRule) {
             AttributeCompareRule c = (AttributeCompareRule) b;

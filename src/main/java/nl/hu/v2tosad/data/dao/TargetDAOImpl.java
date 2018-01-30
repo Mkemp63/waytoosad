@@ -76,6 +76,11 @@ public class TargetDAOImpl implements TargetDAO {
             return "implemented";
         }
     }
+	@Override
+	public void generateRules(ArrayList<BusinessRule> rules) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 

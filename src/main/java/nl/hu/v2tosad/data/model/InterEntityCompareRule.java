@@ -6,23 +6,16 @@ public class InterEntityCompareRule extends BusinessRule{
 	private String tableName2;
 	private String columnName2;
 	private String operator;
-	private int id;
 	private int fk_id;
 
 
-<<<<<<< HEAD
-    public InterEntityCompareRule(BusinessRule br, int interEntityCompareRuleId, String columnName, String tableName2, String columnName2, String operator, int id, int fk_id) {
-		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
-=======
-    public InterEntityCompareRule(BusinessRule br, int interEntityCompareRuleId, String columnName, String tableName2, String columnName2, String operator) {
+    public InterEntityCompareRule(BusinessRule br, int interEntityCompareRuleId, String columnName, String tableName2, String columnName2, String operator, int fk_id) {
 		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName, br.schemaID);
->>>>>>> branch 'master' of https://github.com/Mkemp63/waytoosad.git
 		this.interEntityCompareRuleId = interEntityCompareRuleId;
 		this.columnName = columnName;
 		this.tableName2 = tableName2;
 		this.columnName2 = columnName2;
 		this.operator = operator;
-		this.id = id;
 		this.fk_id = fk_id;
 	}
 
