@@ -8,7 +8,7 @@ public class TupleCompareRule extends BusinessRule{
 
 	
 	public TupleCompareRule(BusinessRule br, int compareRuleId, String column, String compareColumn, String operator) {
-		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
+		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName, br.schemaID);
 		this.compareRuleId = compareRuleId;
 		this.column = column;
 		this.compareColumn= compareColumn;

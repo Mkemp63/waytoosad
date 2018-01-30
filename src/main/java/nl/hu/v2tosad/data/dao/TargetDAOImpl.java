@@ -1,13 +1,14 @@
 package nl.hu.v2tosad.data.dao;
 
+import nl.hu.v2tosad.data.generator.Generator;
+import nl.hu.v2tosad.data.generator.GeneratorFactory;
 import nl.hu.v2tosad.data.model.BusinessRule;
 import nl.hu.v2tosad.data.model.Database;
-import nl.hu.v2tosad.data.model.Generate;
-import nl.hu.v2tosad.data.model.GenerateFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 // implements generated code in target db
@@ -33,7 +34,7 @@ public class TargetDAOImpl implements TargetDAO {
         }
         getConnection();
     }
-
+    @Override
     public final Connection getConnection() {
         try {
             this.conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
@@ -42,7 +43,7 @@ public class TargetDAOImpl implements TargetDAO {
             throw new RuntimeException(ex);
         }
     }
-
+    @Override
     public void closeConnection() {
         try {
             conn.close();
@@ -52,18 +53,28 @@ public class TargetDAOImpl implements TargetDAO {
     }
 
     @Override
-    public void generateRules(ArrayList<BusinessRule> rules) {
+    public void generateRules(ArrayList<BusinessRule> rules, RepositoryDAO repo) {
         // TODO Auto-generated method stub
         for (BusinessRule b : rules) {
             System.out.println("targetDAOimpl input = " + b);
             String dbType = "Oracle";
-            Generate g = GenerateFactory.doGenerate(dbType);
+            Generator g = GeneratorFactory.getGenerator(dbType);
             String sql = g.generateCode(b);
             System.out.println(sql);
 
+            repo.setStatus(implementRule(sql), b.getId());
             //zet in db
         }
         closeConnection();
+    }
+    @Override
+    public String implementRule(String sql){
+        if(sql.equals("not implemented")){
+            return "not implemented";
+        }else{
+            // todo set sql in target db
+            return "implemented";
+        }
     }
 }
 

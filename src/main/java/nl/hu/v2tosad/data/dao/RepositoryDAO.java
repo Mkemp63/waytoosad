@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 // connection to tool db
 public class RepositoryDAO {
-	private Connection conn;
 	private static final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
 	private static final String DB_URL = "jdbc:oracle:thin:@ondora02.hu.nl:8521/cursus02.hu.nl";
 	private static final String DB_USER = "tosad_2017_2b_team2";
@@ -25,8 +24,7 @@ public class RepositoryDAO {
 	
 	public final Connection getConnection() {
 		try {
-			this.conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-			return conn;
+			return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
@@ -41,7 +39,8 @@ public class RepositoryDAO {
         ArrayList<BusinessRule> rules = new ArrayList<>();
 	    for(int id : rulelist) {
             BusinessRule br = new BusinessRule();
-            try (Statement stmt = conn.createStatement()) {
+            try (Connection conn = this.getConnection()) {
+            	Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM BUSINESSRULE WHERE ID = " + id);
 
                 int idResult;
@@ -52,6 +51,7 @@ public class RepositoryDAO {
                 String rule_Name;
                 String discription;
                 String tableName;
+                int schemaID;
                 System.out.println("");
 
                 while (rs.next()) {
@@ -64,8 +64,9 @@ public class RepositoryDAO {
                     rule_Name = rs.getString("RULE_NAME");
                     discription = rs.getString("DISCRIPTION");
                     tableName = rs.getString("tableName");
+                    schemaID = rs.getInt("FK_DATABASE_SCHEMA_ID");
 
-                    br = new BusinessRule(idResult, status, dateModified, code, businessRuleType, rule_Name, discription, tableName);
+                    br = new BusinessRule(idResult, status, dateModified, code, businessRuleType, rule_Name, discription, tableName, schemaID);
                 }
 
                 if (br.getBusinessRuleType().equals("Attribute Range Rule")) {
@@ -86,11 +87,11 @@ public class RepositoryDAO {
                     rs = stmt.executeQuery("SELECT * FROM LIST_RULE WHERE FK_BUSINESSRULE_ID = " + br.getId());
                     int list_id = 0;
                     while (rs.next()) {
-                        br = new AttributeListRule(br, rs.getInt("LIST_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("OPERATORVALUE"), rs.getString("table2"));
+                        br = new AttributeListRule(br, rs.getInt("LIST_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("OPERATORVALUE"));
                         list_id = rs.getInt("LIST_RULE_ID");
                     }
                     rs.close();
-                    rs = stmt.executeQuery("SELECT * FROM LIST_RULE_VALUE WHERE ID = " + list_id);
+                    rs = stmt.executeQuery("SELECT * FROM LIST_RULE_VALUE WHERE FK_LIST_RULE_ID = " + list_id);
 
                     //Parse BusinessRule object naar een AttributeListRule zodat de functies gebruikt kunnen worden van de AttributeListRule klasse
                     //DIt is nodig om de listvalues toe te kunnen voegen aan de arraylist van AttributeListRule
@@ -148,6 +149,7 @@ public class RepositoryDAO {
 
                 rs.close();
                 stmt.close();
+                conn.close();
             } catch (SQLException sqle) {
                 sqle.printStackTrace();
             }
@@ -156,10 +158,30 @@ public class RepositoryDAO {
         return rules;
 
 	}
+	
+	public TargetDAO getTargetDAO(int targetId) {
+		TargetDAO target = null;
+		try(Connection conn = this.getConnection()) {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM DATABASE_SCHEMA WHERE ID = " + targetId);
+			
+			while(rs.next()) {
+				target = TargetDatabaseFactory.getTargetDAO(rs.getString("DB_TYPE"), rs.getString("DB_URL"), rs.getString("DB_USER"), rs.getString("DB_PASS"));
+			}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return target;
+	}
 
 	public Database getTarget(){
         Database db = null;
-        try (Statement stmt = conn.createStatement()) {
+        try (Connection conn = this.getConnection()) {
+        	Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM database_schema WHERE ID = 1");
             while (rs.next()) {
                 String id = rs.getString("id");
@@ -174,17 +196,27 @@ public class RepositoryDAO {
             }
             rs.close();
             stmt.close();
+            conn.close();
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
 	    return db;
     }
 
-    public void closeConnection() {
-	    try{
-        conn.close();
-
-	    }catch (SQLException e){System.out.println(e);}
+//    public void closeConnection() {
+//	    try{
+//        conn.close();
+//
+//	    }catch (SQLException e){System.out.println(e);}
+//    }
+//
+    public void setRuleStatus(String status, int id ) {
+        try (Connection conn = this.getConnection()) {
+        	Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE BUSINESSRULE set STATUS = '" + status + "' where id = " + id);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();;
+        }
     }
 }
 

@@ -1,27 +1,27 @@
 package nl.hu.v2tosad.data.model;
 
 import java.util.ArrayList;
+
+import nl.hu.v2tosad.data.generator.Generator;
+import nl.hu.v2tosad.data.generator.GeneratorFactory;
 //POJO
 public class AttributeListRule extends BusinessRule{
 	private int listRuleId;
 	private String column;
 	private String operator;
 	private ArrayList<String> compareValue = new ArrayList<String>();
-	private String listTable;
 
 	
-	public AttributeListRule(BusinessRule br, int listRuleId, String column, String operator, String listTable) {
-		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
+	public AttributeListRule(BusinessRule br, int listRuleId, String column, String operator) {
+		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName, br.schemaID);
 		this.listRuleId = listRuleId;
 		this.column = column;
 		this.operator = operator;
-		this.listTable = listTable;
 	}
-
+	
     public String generateCode(String dbType){
-      /*  Generate g = new GenerateFactory(dbType);
-        return g.generateAttributeListRule();*/
-        return null;
+    	Generator gen = GeneratorFactory.getGenerator(dbType);
+    	return gen.generateAttributeListRule(this);
     }
 	
 	public void addValue(String item) {
