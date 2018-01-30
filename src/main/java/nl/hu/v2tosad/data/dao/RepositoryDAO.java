@@ -107,7 +107,7 @@ public class RepositoryDAO {
                     rs.close();
                     rs = stmt.executeQuery("SELECT * FROM inter_entity_compare_rule WHERE fk_businessrule_id =" + br.getId());
                     while (rs.next()) {
-                        br = new InterEntityCompareRule(br, rs.getInt("INTER_ENTITY_COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("TABLENAME2"), rs.getString("COLUMN2"), rs.getString("OPERATOR"), rs.getInt("FK_ID"));
+                        br = new InterEntityCompareRule(br, rs.getInt("INTER_ENTITY_COMPARE_RULE_ID"), rs.getString("COLUMNNAME"), rs.getString("TABLENAME2"), rs.getString("COLUMN2"), rs.getString("OPERATOR"), rs.getString("AFK"));
                     }
                 } else if (br.getBusinessRuleType().equals("Entity Other Rule")) {
                     rs.close();

@@ -79,48 +79,30 @@ public class OracleGenerator implements Generator{
 		return result.toString();
 	}
 
-@Override
-public String generateInterEntityCompareRule(InterEntityCompareRule i) {
-	StringBuilder result = new StringBuilder("create or replace trigger " + i.getCode());
-	result.append("\nbefore or update on table TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName());
-	result.append("\nfor each row \ndeclare \nv_result varchar2; \nbegin \ncase TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + "." + i.getColumnName());
-	result.append("\nwhen > TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result.append("\nthen v_result := 'GREATER THAN';");
-	result.append("\nwhen < TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result.append("\nthen v_result := 'LESSER THAN';");
-	result.append("\nwhen >= TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result.append("\nthen v_result := 'GREATER OR EQUAL THAN';");
-	result.append("\nwhen <= TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result.append("\nthen v_result := 'LESSER OR EQUAL THAN';");
-	result.append("\nwhen = TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result.append("\nthen v_result := 'EQUALS';");
-	result.append("\nwhen != TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result.append("\nthen v_result := 'NOT EQUAL'; \nend");
-	result.append("\n if " + i.getOperator() + " != v_result then");
-	result.append("\nraise_application_error(-20000," + i.getCode() + " description: " + i.getDiscription() + " violated)");
-	result.append("\nend if; \nend" + i.getCode());
-	
-	StringBuilder result2 = new StringBuilder("create or replace trigger " + i.getCode());
-	result2.append("\nbefore or update on table TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
-	result2.append("\nfor each row \ndeclare \nv_result varchar2; \nbegin \ncase TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + "." + i.getColumnName());
-	result2.append("\nwhen > TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result2.append("\nthen v_result := 'GREATER THAN';");
-	result2.append("\nwhen < TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result2.append("\nthen v_result := 'LESSER THAN';");
-	result2.append("\nwhen >= TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result2.append("\nthen v_result := 'GREATER OR EQUAL THAN';");
-	result2.append("\nwhen <= TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result2.append("\nthen v_result := 'LESSER OR EQUAL THAN';");
-	result2.append("\nwhen = TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result2.append("\nthen v_result := 'EQUALS';");
-	result2.append("\nwhen != TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2() + "." + i.getColumnName2());
-	result2.append("\nthen v_result := 'NOT EQUAL'; \nend");
-	result2.append("\n if " + i.getOperator() + " != v_result then");
-	result2.append("\nraise_application_error(-20000," + i.getCode() + " description: " + i.getDiscription() + " violated)");
-	result2.append("\nend if; \nend" + i.getCode());
-	result.append("\n" + result2.toString());
-	return result.toString();
-}
+   @Override
+   public String generateInterEntityCompareRule(InterEntityCompareRule i) {
+   	StringBuilder result = new StringBuilder("create or replace trigger " + i.getCode() + i.getTableName());
+   	result.append("\nbefore insert or update on TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName());
+   	result.append("\nfor each row \ndeclare \nv_column1 varchar2(400); \nv_column2 varchar2(400); \nbegin");
+   	result.append("\nselect " +i.getColumnName() + " into v_column1 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ";");
+   	result.append("\nselect " +i.getColumnName2() + " into v_column2 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
+   	result.append("\nwhere (select ID from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ") = " + i.getAfk() + "_ID;");
+   	result.append("\n if v_column1 " + i.getOperator() + " v_column2 then null;");
+   	result.append("\nelse \nraise_application_error(-20000,'" + i.getCode() + " description: " + i.getDiscription() + " violated');");
+   	result.append("\nend if; \nend " + i.getCode() + i.getTableName() + ";");
+   	
+   	StringBuilder result2 = new StringBuilder("\ncreate or replace trigger " + i.getCode() + i.getTableName2());
+   	result2.append("\nbefore insert or update on TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName());
+   	result2.append("\nfor each row \ndeclare \nv_column1 varchar2(400); \nv_column2 varchar2(400); \nbegin");
+   	result2.append("\nselect " +i.getColumnName() + " into v_column1 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ";");
+   	result2.append("\nselect " +i.getColumnName2() + " into v_column2 from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName2());
+   	result2.append("\nwhere (select ID from TOSAD_2017_2B_TEAM2_TARGET." + i.getTableName() + ") = " + i.getAfk() + "_ID;");
+   	result2.append("\n if v_column1 " + i.getOperator() + " v_column2 then null;");
+   	result2.append("\nelse \nraise_application_error(-20000,'" + i.getCode() + " description: " + i.getDiscription() + " violated');");
+   	result2.append("\nend if; \nend " + i.getCode() + i.getTableName2() + ";");
+   	result.append("\n" + result2.toString());
+   	return result.toString();
+   }
 
     @Override
     public String generateTupleCompareRule(TupleCompareRule t) {
