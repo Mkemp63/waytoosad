@@ -55,12 +55,4 @@ public class OracleTargetDAO implements TargetDAO{
 			throw new RuntimeException(ex);
 		}
 	}
-
-	@Override
-	public void closeConnection() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
 }

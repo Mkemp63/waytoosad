@@ -26,16 +26,20 @@ public class BusinessRuleService implements ApplicationService {
 		this.target = new TargetDAOImpl(db);
 	}
 
-    public void StartGenerating(ArrayList<Integer> rulelist) {
+    public void startGenerating(ArrayList<Integer> rulelist) {
         System.out.println("Start generating rules");
         ArrayList<BusinessRule> rules = repo.getBusinessRules(rulelist);
         System.out.println(rules);
-        Database db = repo.getTarget();
+        int targetId = rules.get(0).getSchemaID();
+        TargetDAO targetDAO = repo.getTargetDAO(targetId);
+        
+        targetDAO.generateRules(rules);
+//        Database db = repo.getTarget();
 
 
-        addTargetSchema(db);
-
-        target.generateRules(rules);
-        repo.closeConnection();
+//        addTargetSchema(db);
+//
+//        target.generateRules(rules);
+//        repo.closeConnection();
     }
 }

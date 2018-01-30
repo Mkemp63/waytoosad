@@ -1,6 +1,8 @@
-package nl.hu.v2tosad.data.model;
+package nl.hu.v2tosad.data.generator;
 
-public class GenerateImplOracle implements Generate{
+import nl.hu.v2tosad.data.model.*;
+
+public class OracleGenerator implements Generator{
 
     public String generateCode(BusinessRule b){
         String type = b.getBusinessRuleType();
@@ -39,9 +41,12 @@ public class GenerateImplOracle implements Generate{
     @Override
     public String generateAttributeCompareRule(AttributeCompareRule c) {
         System.out.println("AttributeCompareRule in = " +c);
-        StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + c.tableName);
-        result.append(" add constraint " + c.code);
-        result.append("check (" + c.getColumn() + c.getOperator() + c.getCompareValue() );
+        if(c.getOperator().equals("GREATER THAN OR EQUAL TO")) {
+        	c.setOperator(">=");
+        }
+        StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + c.getTableName());
+        result.append(" add constraint " + c.getCode());
+        result.append(" check (" + c.getColumn() + " " + c.getOperator() + " " + c.getCompareValue() );
         result.append(")");
       //System.out.println(result.toString());
         return result.toString();
@@ -51,7 +56,7 @@ public class GenerateImplOracle implements Generate{
     public String generateAttributeListRule(AttributeListRule l) {
 	   StringBuilder result = new StringBuilder("alter table TOSAD_2017_2B_TEAM2_TARGET." + l.getTableName());
 		result.append(" add constraint " + l.getCode());
-		result.append(" check (" + l.getColumn() + " " + l.getOperator() + " (" + l.getCompareValue());
+		result.append(" check (" + l.getColumn() + " " + l.getOperator() + " (");
 		for (String s : l.getCompareValue()) {
 			if (l.getCompareValue().indexOf(s) == 0) {
 				result.append("'" + s + "'");
