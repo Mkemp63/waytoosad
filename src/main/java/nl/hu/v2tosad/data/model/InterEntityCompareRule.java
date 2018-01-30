@@ -9,7 +9,7 @@ public class InterEntityCompareRule extends BusinessRule{
 
 
     public InterEntityCompareRule(BusinessRule br, int interEntityCompareRuleId, String columnName, String tableName2, String columnName2, String operator) {
-		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
+		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName, br.schemaID);
 		this.interEntityCompareRuleId = interEntityCompareRuleId;
 		this.columnName = columnName;
 		this.tableName2 = tableName2;

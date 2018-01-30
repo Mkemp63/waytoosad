@@ -11,13 +11,14 @@ public class BusinessRule {
 	protected String rule_Name;
 	protected String discription;
 	protected String tableName;
+	protected int schemaID;
 
 
 	public BusinessRule(){
 
 	}
 	
-	public BusinessRule(int id, String status, Date dateModified, String code, String businessRuleType, String rule_Name, String discription, String tableName) {
+	public BusinessRule(int id, String status, Date dateModified, String code, String businessRuleType, String rule_Name, String discription, String tableName, int schemaID) {
 		this.id = id;
 		this.status = status;
 		this.dateModified = dateModified;
@@ -26,9 +27,10 @@ public class BusinessRule {
 		this.rule_Name = rule_Name;
 		this.discription = discription;
 		this.tableName = tableName;
+		this.schemaID = schemaID;
 	}
 	
-	public String generateCode() {
+	public String generateCode(String dbType) {
         return null;
     }
 
@@ -79,6 +81,12 @@ public class BusinessRule {
 	}
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
+	}
+	public int getSchemaID() {
+		return schemaID;
+	}
+	public void setSchemaID(int schemaID) {
+		this.schemaID = schemaID;
 	}
 
     @Override

@@ -10,7 +10,7 @@ public class AttributeRangeRule extends BusinessRule{
 
 
 	public AttributeRangeRule(BusinessRule br, int rangeRuleId, int minVal, int maxVal, String operator, String column) {
-		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName);
+		super(br.id, br.status, br.dateModified, br.code, br.businessRuleType, br.rule_Name, br.discription, br.tableName, br.schemaID);
 		this.rangeRuleId = rangeRuleId;
 		this.minVal = minVal;
 		this.maxVal = maxVal;
