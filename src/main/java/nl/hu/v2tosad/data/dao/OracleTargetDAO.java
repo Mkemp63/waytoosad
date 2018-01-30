@@ -37,6 +37,7 @@ public class OracleTargetDAO implements TargetDAO{
 				System.out.println("Dit is de SQL-code: ");
 				System.out.println(sql);
 //				stmt.executeQuery(sql);
+				this.updateAffected(br.getId());
 			}
 			
 			stmt.close();

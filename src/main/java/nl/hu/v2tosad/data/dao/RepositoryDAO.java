@@ -19,7 +19,6 @@ public class RepositoryDAO {
 		catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		getConnection();
 	}
 	
 	public final Connection getConnection() {
