@@ -1,11 +1,10 @@
 package nl.hu.v2tosad.data.model;
 
-import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import nl.hu.v2tosad.data.generator.Generator;
 import nl.hu.v2tosad.data.generator.GeneratorFactory;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Main {
 	public static void main(String[] args) throws ParseException {

@@ -1,19 +1,18 @@
 package nl.hu.v2tosad.data.dao;
 
+import nl.hu.v2tosad.data.model.BusinessRule;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import nl.hu.v2tosad.data.model.BusinessRule;
-
 public class OracleTargetDAO implements TargetDAO{
 	private final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
-	private String DB_URL;
-	private String DB_USER;
-	private String DB_PASS;
+	private final String DB_URL;
+	private final String DB_USER;
+	private final String DB_PASS;
 
 	public OracleTargetDAO(String DB_URL, String DB_USER, String DB_PASS) {
 		this.DB_URL = DB_URL;
@@ -48,13 +47,27 @@ public class OracleTargetDAO implements TargetDAO{
 		} 
 	}
 	
+	public void dropRules(ArrayList<BusinessRule> rules) {
+		try(Connection conn = getConnection()) {
+			Statement stmt = conn.createStatement();
+			for(BusinessRule br : rules) {
+				String sql = "ALTER TABLE " + br.getTableName() + " DROP CONSTRAINT " + br.getCode();
+				System.out.println(sql);
+			}
+			stmt.close();
+			conn.close();
+		} catch ( SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+	
 	public void updateAffected(int id) {
 		RepositoryDAO repo = new RepositoryDAO();
 		repo.setRuleStatus("ACTIVE", id);
 	}
 	
 
-	@Override
+
 	public Connection getConnection() {
 		try {
 			return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);

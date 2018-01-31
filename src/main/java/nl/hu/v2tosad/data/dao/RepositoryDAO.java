@@ -21,20 +21,15 @@ public class RepositoryDAO {
 		}
 	}
 	
-	public final Connection getConnection() {
+	private Connection getConnection() {
 		try {
 			return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
 	}
-	
-	//TODO
-//	public BusinessRule getRuleDetails() {
-//		
-//	}
 
-	public ArrayList<BusinessRule> getBusinessRules(ArrayList<Integer> rulelist) {
+	public ArrayList<BusinessRule> getAllBusinessRules(ArrayList<Integer> rulelist) {
         ArrayList<BusinessRule> rules = new ArrayList<>();
 	    for(int id : rulelist) {
             BusinessRule br = new BusinessRule();
@@ -214,7 +209,7 @@ public class RepositoryDAO {
         	Statement stmt = conn.createStatement();
             stmt.executeUpdate("UPDATE BUSINESSRULE set STATUS = '" + status + "' where id = " + id);
         } catch (SQLException sqle) {
-            sqle.printStackTrace();;
+            sqle.printStackTrace();
         }
     }
 }
