@@ -28,7 +28,4 @@ public class AttributeOtherRule extends BusinessRule{
                 ", plSqlCode='" + plSqlCode + '\'' +
                 '}'+'}';
     }
-	/*public String generateCode() {
-		
-	}*/
 }
