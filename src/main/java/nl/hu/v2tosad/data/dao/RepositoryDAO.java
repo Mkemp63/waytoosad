@@ -135,12 +135,6 @@ public class RepositoryDAO {
                     }
                 }
 
-
-//			if (br.getId() == 0) {
-//				SQLException sqle = new SQLException();
-//				sqle.printStackTrace();
-//			}
-
                 rs.close();
                 stmt.close();
                 conn.close();
@@ -197,17 +191,19 @@ public class RepositoryDAO {
 	    return db;
     }
 
-//    public void closeConnection() {
-//	    try{
-//        conn.close();
-//
-//	    }catch (SQLException e){System.out.println(e);}
-//    }
-//
     public void setRuleStatus(String status, int id ) {
         try (Connection conn = this.getConnection()) {
         	Statement stmt = conn.createStatement();
             stmt.executeUpdate("UPDATE BUSINESSRULE set STATUS = '" + status + "' where id = " + id);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
+    public void deleteRules(ArrayList<Integer> idList){
+        try (Connection conn = this.getConnection()) {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DELETE FROM BUSINESSRULE WHERE id = " + idList);
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }

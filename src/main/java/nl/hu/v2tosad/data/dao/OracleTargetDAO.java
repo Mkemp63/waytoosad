@@ -26,17 +26,19 @@ public class OracleTargetDAO implements TargetDAO{
 		}
 	}
 	
-	
+	//todo comment out to insert in target db.
 	public void generateRules(ArrayList<BusinessRule> rules) {
 		try(Connection conn = getConnection()) {
 			Statement stmt = conn.createStatement();
-			
-			for(BusinessRule br : rules) {
+            RepositoryDAO repo = new RepositoryDAO();
+
+            for(BusinessRule br : rules) {
 				String sql = br.generateCode("Oracle");
 				System.out.println("Dit is de SQL-code: ");
 				System.out.println(sql);
 //				stmt.executeQuery(sql);
-//				this.updateAffected(br.getId());
+//              repo.setRuleStatus("ACTIVE", br.getId());
+
 			}
 			
 			stmt.close();
@@ -47,7 +49,7 @@ public class OracleTargetDAO implements TargetDAO{
 		} 
 	}
 	
-	public void dropRules(ArrayList<BusinessRule> rules) {
+	public void dropRules(ArrayList<BusinessRule> rules) { //todo execute statement, fix statement
 		try(Connection conn = getConnection()) {
 			Statement stmt = conn.createStatement();
 			for(BusinessRule br : rules) {
@@ -60,13 +62,6 @@ public class OracleTargetDAO implements TargetDAO{
 			sqle.printStackTrace();
 		}
 	}
-	
-	public void updateAffected(int id) {
-		RepositoryDAO repo = new RepositoryDAO();
-		repo.setRuleStatus("ACTIVE", id);
-	}
-	
-
 
 	public Connection getConnection() {
 		try {

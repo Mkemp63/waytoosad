@@ -11,31 +11,40 @@ public class BusinessRuleService implements ApplicationService {
 	private ArrayList<BusinessRule> allRules = new ArrayList<BusinessRule>();
 	private final RepositoryDAO repo = new RepositoryDAO();
 
+	int targetId = allRules.get(0).getSchemaID();
+    TargetDAO targetDAO = repo.getTargetDAO(targetId);
+
     public void startGenerating(ArrayList<Integer> idList) {
         allRules = this.getBusinesRuleDetails(idList);
-    	
-        int targetId = allRules.get(0).getSchemaID();
-        TargetDAO targetDAO = repo.getTargetDAO(targetId);
-        
         targetDAO.generateRules(allRules);
     }
-    
-    public void startUpdating(int id) {
-    	ArrayList<Integer> idList= new ArrayList<Integer>();
-    	idList.add(id);
-    	allRules = this.getBusinesRuleDetails(idList);
-    	
-    	int targetId = allRules.get(0).getSchemaID();
-    	TargetDAO targetDAO = repo.getTargetDAO(targetId);
-    	
-    	targetDAO.dropRules(allRules);
-    	targetDAO.generateRules(allRules);
-    }
-    
+
     private ArrayList<BusinessRule> getBusinesRuleDetails(ArrayList<Integer> idList) {
         System.out.println("Start generating rules");
         allRules = repo.getAllBusinessRules(idList);
         System.out.println(allRules);
         return allRules;
     }
+    public void startUpdating(int id) {
+    	ArrayList<Integer> idList= new ArrayList<Integer>();
+    	idList.add(id);
+    	allRules = this.getBusinesRuleDetails(idList);
+    	targetDAO.dropRules(allRules);
+    	targetDAO.generateRules(allRules);
+    }
+
+    public void deleteRules(ArrayList<Integer> idList) {
+        allRules = this.getBusinesRuleDetails(idList);
+        targetDAO.dropRules(allRules);
+        repo.deleteRules(idList);
+    }
+
+    public void deactivateRules(ArrayList<Integer> idList) {
+        allRules = this.getBusinesRuleDetails(idList);
+        targetDAO.dropRules(allRules);
+        for(int id : idList) {
+            repo.setRuleStatus("NOT ACTIVE", id);
+        }
+    }
 }
+
