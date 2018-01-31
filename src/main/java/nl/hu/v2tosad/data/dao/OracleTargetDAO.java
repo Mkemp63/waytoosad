@@ -36,10 +36,14 @@ public class OracleTargetDAO implements TargetDAO{
 				String sql = br.generateCode("Oracle");
 				System.out.println("Dit is de SQL-code: ");
 				System.out.println(sql);
-				if (!sql.equals("not implemented")) {
-                    stmt.executeQuery(sql);
-                    repo.setRuleStatus("ACTIVE", br.getId());
-                }
+                try {
+                    if (!sql.equals("not implemented")) {
+
+                        stmt.executeQuery(sql);
+                        repo.setRuleStatus("ACTIVE", br.getId());
+                        repo.setDateModified(br.getId());
+                    }
+                }catch (SQLException e){System.out.println("update rule "+br.getId()+" failed" );}
 			}
 			
 			stmt.close();
@@ -54,8 +58,19 @@ public class OracleTargetDAO implements TargetDAO{
 		try(Connection conn = getConnection()) {
 			Statement stmt = conn.createStatement();
 			for(BusinessRule br : rules) {
-				String sql = "ALTER TABLE " + br.getTableName() + " DROP CONSTRAINT " + br.getCode();
-				System.out.println(sql);
+				try {
+                    String sql = "ALTER TABLE " + br.getTableName() + " DROP CONSTRAINT " + br.getCode();// constraint
+                    System.out.println(sql);
+                    stmt.executeQuery(sql);
+                }catch (SQLException s){System.out.println(s);}
+                try {
+                    String sql = "DROP TRIGGER "+br.getCode() + "_" + br.getTableName();//trigger
+                    System.out.println(sql);
+                    stmt.executeQuery(sql);
+                }catch (SQLException s){
+                    System.out.println(s);
+                }
+
 			}
 			stmt.close();
 			conn.close();

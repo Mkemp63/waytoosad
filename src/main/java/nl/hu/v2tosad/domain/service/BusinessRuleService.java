@@ -17,6 +17,7 @@ public class BusinessRuleService implements ApplicationService {
         allRules = this.getBusinesRuleDetails(idList);
         getTarget();
         targetDAO.generateRules(allRules);
+
     }
 
     private ArrayList<BusinessRule> getBusinesRuleDetails(ArrayList<Integer> idList) {
