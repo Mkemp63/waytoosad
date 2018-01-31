@@ -38,7 +38,6 @@ public class OracleTargetDAO implements TargetDAO{
 				System.out.println(sql);
                 try {
                     if (!sql.equals("not implemented")) {
-
                         stmt.executeQuery(sql);
                         repo.setRuleStatus("ACTIVE", br.getId());
                         repo.setDateModified(br.getId());

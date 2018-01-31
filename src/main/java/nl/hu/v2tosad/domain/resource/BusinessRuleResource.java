@@ -40,7 +40,7 @@ public class BusinessRuleResource {
 
     @POST
     @Path("/rules")
-    public /*String*/ void generateRules(InputStream is) {
+    public void generateRules(InputStream is) {
         ArrayList<Integer> rulelist = inputToList(is);
         System.out.println(rulelist);
         service.startGenerating(rulelist);

@@ -1,4 +1,8 @@
 package nl.hu.v2tosad.data.model;
+
+import nl.hu.v2tosad.data.generator.Generator;
+import nl.hu.v2tosad.data.generator.GeneratorFactory;
+
 //POJO
 public class TupleOtherRule extends BusinessRule{
 	private int otherRuleId;
@@ -14,9 +18,9 @@ public class TupleOtherRule extends BusinessRule{
 	}
 
     public String generateCode(String dbType){
-/*        Generate g = new GenerateFactory(dbType);
-        return g.generateTupleOtherRule();*/
-        return null;
+        Generator g = GeneratorFactory.getGenerator(dbType);
+        return g.generateTupleOtherRule(this);
+
     }
 
     @Override

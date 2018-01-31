@@ -4,39 +4,6 @@ import nl.hu.v2tosad.data.model.*;
 
 public class OracleGenerator implements Generator{
 
-    public String generateCode(BusinessRule b){
-        String type = b.getBusinessRuleType();
-        System.out.println("generateImplOracle generate code input= " +b);
-        if (b instanceof AttributeCompareRule) {
-            AttributeCompareRule c = (AttributeCompareRule) b;
-            /*System.out.println("generate instanceof = " + c);*/
-            return generateAttributeCompareRule(c);
-        }else if(b instanceof AttributeListRule ) {
-            AttributeListRule c = (AttributeListRule) b;
-            return generateAttributeListRule(c);
-        }else if(b instanceof AttributeOtherRule) {
-            AttributeOtherRule c = (AttributeOtherRule)b;
-            return generateAttributeOtherRule(c);
-        }else if(b instanceof AttributeRangeRule) {
-            AttributeRangeRule c = (AttributeRangeRule)b;
-            return generateAttributeRangeRule(c);
-        }else if(b instanceof EntityOtherRule) {
-            EntityOtherRule c = (EntityOtherRule)b;
-            return generateEntityOtherRule(c);
-        }else if(b instanceof InterEntityCompareRule) {
-            InterEntityCompareRule c = (InterEntityCompareRule)b;
-            return generateInterEntityCompareRule(c);
-        }else if(b instanceof ModifyRule) {
-            ModifyRule c = (ModifyRule)b;
-            return generateModifyRule(c);
-        }else if(b instanceof TupleCompareRule) {
-            TupleCompareRule c = (TupleCompareRule)b;
-            return generateTupleCompareRule(c);
-        }else if(b instanceof TupleOtherRule) {
-            TupleOtherRule c = (TupleOtherRule) b;
-            return generateTupleOtherRule(c);
-        }else {return "";}
-    }
 
     @Override
     public String generateAttributeCompareRule(AttributeCompareRule c) {
@@ -124,18 +91,18 @@ public class OracleGenerator implements Generator{
         return result.toString();
     }
 
-    private String generateAttributeOtherRule(AttributeOtherRule b){
+    public String generateAttributeOtherRule(AttributeOtherRule b){
         return "not implemented";
     }
 
-    private String generateEntityOtherRule(EntityOtherRule b){
+    public String generateEntityOtherRule(EntityOtherRule b){
         return "not implemented";
     }
 
-    private String generateModifyRule(ModifyRule b){
+    public String generateModifyRule(ModifyRule b){
         return "not implemented";
     }
-    private String generateTupleOtherRule(TupleOtherRule b){
+    public String generateTupleOtherRule(TupleOtherRule b){
         return "not implemented";
     }
 }

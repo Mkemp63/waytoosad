@@ -1,21 +1,16 @@
 package nl.hu.v2tosad.data.generator;
 
-import nl.hu.v2tosad.data.model.AttributeCompareRule;
-import nl.hu.v2tosad.data.model.AttributeListRule;
-import nl.hu.v2tosad.data.model.AttributeRangeRule;
-import nl.hu.v2tosad.data.model.BusinessRule;
-import nl.hu.v2tosad.data.model.InterEntityCompareRule;
-import nl.hu.v2tosad.data.model.TupleCompareRule;
+import nl.hu.v2tosad.data.model.*;
 
 public interface Generator {
-    String generateCode(BusinessRule b);
-    String generateAttributeCompareRule(AttributeCompareRule c);
-    String generateAttributeListRule(AttributeListRule l);
-    String generateAttributeRangeRule(AttributeRangeRule r);
-    String generateInterEntityCompareRule(InterEntityCompareRule i);
-    String generateTupleCompareRule(TupleCompareRule t);
-/*  public String generateAttributeOtherRule();
-    public String generateEntityOtherRule();
-    public String generateModifyRule();
-    public String generateTupleOtherRule();*/
+
+    String generateAttributeCompareRule(AttributeCompareRule a);
+    String generateAttributeListRule(AttributeListRule a);
+    String generateAttributeRangeRule(AttributeRangeRule a);
+    String generateInterEntityCompareRule(InterEntityCompareRule a);
+    String generateTupleCompareRule(TupleCompareRule a);
+    String generateAttributeOtherRule(AttributeOtherRule a);
+    String generateEntityOtherRule(EntityOtherRule a);
+    String generateModifyRule(ModifyRule a);
+    String generateTupleOtherRule(TupleOtherRule a);
 }
