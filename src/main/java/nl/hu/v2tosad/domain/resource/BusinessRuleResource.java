@@ -41,12 +41,17 @@ public class BusinessRuleResource {
 
     @POST
     @Path("/activate")
-    public /*String*/ void generateRules(InputStream is) {
+    public void generateRules(InputStream is) {
         ArrayList<Integer> rulelist = inputToList(is);
         System.out.println(rulelist);
         service.startGenerating(rulelist);
     }
 
+    @POST
+    @Path("/activateAll")
+    public void generateAllRules() {
+        service.getAllRuleIds();
+    }
 
     private ArrayList<Integer> inputToList(InputStream is){
         ArrayList<Integer> rulelist = new ArrayList<Integer>();

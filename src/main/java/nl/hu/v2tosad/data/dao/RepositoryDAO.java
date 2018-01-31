@@ -194,5 +194,20 @@ public class RepositoryDAO {
             sqle.printStackTrace();
         }
     }
+
+    public ArrayList<Integer> getAllRuleIds(){
+        ArrayList<Integer> idList = new ArrayList<Integer>();
+        try(Connection conn = this.getConnection()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT ID FROM BUSINESSRULE");
+            while(rs.next()) {
+                idList.add(rs.getInt("ID"));
+            }
+
+        }catch (SQLException e){
+
+        }
+        return idList;
+    }
 }
 

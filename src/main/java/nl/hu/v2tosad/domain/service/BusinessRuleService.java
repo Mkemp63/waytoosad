@@ -55,5 +55,9 @@ public class BusinessRuleService implements ApplicationService {
         int targetId = allRules.get(0).getSchemaID();
         targetDAO = repo.getTargetDAO(targetId);
     }
+
+    public void getAllRuleIds(){
+        startGenerating(repo.getAllRuleIds());
+    }
 }
 
