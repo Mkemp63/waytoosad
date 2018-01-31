@@ -26,7 +26,6 @@ public class OracleTargetDAO implements TargetDAO{
 		}
 	}
 	
-	//todo comment out to insert in target db.
 	public void generateRules(ArrayList<BusinessRule> rules) {
 		try(Connection conn = getConnection()) {
 			Statement stmt = conn.createStatement();
@@ -54,9 +53,19 @@ public class OracleTargetDAO implements TargetDAO{
 		try(Connection conn = getConnection()) {
 			Statement stmt = conn.createStatement();
 			for(BusinessRule br : rules) {
-				String sql = "ALTER TABLE " + br.getTableName() + " DROP CONSTRAINT " + br.getCode();
-				System.out.println(sql);
-				stmt.executeQuery(sql);
+				try {
+					String sql = "ALTER TABLE " + br.getTableName() + " DROP CONSTRAINT " + br.getCode();
+					System.out.println(sql);
+					stmt.executeQuery(sql);
+				} catch (SQLException sqle) {
+					try {
+						String sql = "DROP TRIGGER " + br.getCode() + "_" + br.getTableName();
+						System.out.println(sql);
+						stmt.executeQuery(sql);
+					} catch (SQLException sqle2) {
+						sqle2.printStackTrace();
+					}
+				}
 			}
 			stmt.close();
 			conn.close();

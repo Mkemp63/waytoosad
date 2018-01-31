@@ -78,7 +78,7 @@ public class OracleGenerator implements Generator{
 	   result.append("\nSELECT " + i.getColumnName2() + " into v_column \n from " + i.getTableName2() + "\n where id = :new." + i.getAfk() + "_ID;");
 	   result.append("\nif :new." + i.getColumnName() + " " + i.getOperator() + " v_column THEN");
 	   result.append("\nraise_application_error(-20000, '" + i.getCode() + " description: " + i.getDiscription() + " IS VIOLATED');");
-	   result.append("\nEND IF;\nEND");
+	   result.append("\nEND IF;\nEND;");
 	   return result.toString();
    }
 
