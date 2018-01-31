@@ -2,9 +2,7 @@ package nl.hu.v2tosad.domain.service;
 
 import nl.hu.v2tosad.data.dao.RepositoryDAO;
 import nl.hu.v2tosad.data.dao.TargetDAO;
-import nl.hu.v2tosad.data.dao.TargetDAOImpl;
 import nl.hu.v2tosad.data.model.BusinessRule;
-import nl.hu.v2tosad.data.model.Database;
 
 import java.util.ArrayList;
 // class to give structure in application
