@@ -21,7 +21,7 @@ public class RepositoryDAO {
 		}
 	}
 	
-	public final Connection getConnection() {
+	private Connection getConnection() {
 		try {
 			return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 		} catch (Exception ex) {
@@ -209,7 +209,7 @@ public class RepositoryDAO {
         	Statement stmt = conn.createStatement();
             stmt.executeUpdate("UPDATE BUSINESSRULE set STATUS = '" + status + "' where id = " + id);
         } catch (SQLException sqle) {
-            sqle.printStackTrace();;
+            sqle.printStackTrace();
         }
     }
 }

@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class BusinessRuleService implements ApplicationService {
 	private ArrayList<BusinessRule> allRules = new ArrayList<BusinessRule>();
-	private RepositoryDAO repo = new RepositoryDAO();
+	private final RepositoryDAO repo = new RepositoryDAO();
 
     public void startGenerating(ArrayList<Integer> idList) {
-    	this.getBusinesRuleDetails(idList);
+        allRules = this.getBusinesRuleDetails(idList);
     	
         int targetId = allRules.get(0).getSchemaID();
         TargetDAO targetDAO = repo.getTargetDAO(targetId);
@@ -23,7 +23,7 @@ public class BusinessRuleService implements ApplicationService {
     public void startUpdating(int id) {
     	ArrayList<Integer> idList= new ArrayList<Integer>();
     	idList.add(id);
-    	this.getBusinesRuleDetails(idList);
+    	allRules = this.getBusinesRuleDetails(idList);
     	
     	int targetId = allRules.get(0).getSchemaID();
     	TargetDAO targetDAO = repo.getTargetDAO(targetId);
@@ -32,7 +32,7 @@ public class BusinessRuleService implements ApplicationService {
     	targetDAO.generateRules(allRules);
     }
     
-    public ArrayList<BusinessRule> getBusinesRuleDetails(ArrayList<Integer> idList) {
+    private ArrayList<BusinessRule> getBusinesRuleDetails(ArrayList<Integer> idList) {
         System.out.println("Start generating rules");
         allRules = repo.getAllBusinessRules(idList);
         System.out.println(allRules);

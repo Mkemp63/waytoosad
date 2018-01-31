@@ -30,27 +30,15 @@ public class AttributeCompareRule extends BusinessRule{
 		return compareRuleId;
 	}
 
-	public void setCompareRuleId(int compareRuleId) {
-		this.compareRuleId = compareRuleId;
-	}
-
-	public String getCompareName() {
+    public String getCompareName() {
 		return compareName;
 	}
 
-	public void setCompareName(String compareName) {
-		this.compareName = compareName;
-	}
-
-	public String getCompareValue() {
+    public String getCompareValue() {
 		return compareValue;
 	}
 
-	public void setCompareValue(String compareValue) {
-		this.compareValue = compareValue;
-	}
-
-	public String getOperator() {
+    public String getOperator() {
 		return operator;
 	}
 
@@ -62,7 +50,4 @@ public class AttributeCompareRule extends BusinessRule{
         return column;
     }
 
-    public void setColumn(String column) {
-        this.column = column;
-    }
 }

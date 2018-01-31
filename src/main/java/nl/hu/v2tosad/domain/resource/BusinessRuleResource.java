@@ -1,6 +1,5 @@
 package nl.hu.v2tosad.domain.resource;
 
-import nl.hu.v2tosad.data.dao.RepositoryDAO;
 import nl.hu.v2tosad.domain.provider.ServiceProvider;
 import nl.hu.v2tosad.domain.service.BusinessRuleService;
 
@@ -10,14 +9,13 @@ import javax.json.JsonObject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 
 // starts process for rest service
 @Path("/generate")
 public class BusinessRuleResource {
-	private BusinessRuleService service = (BusinessRuleService) ServiceProvider.getApplicationService(new BusinessRuleService());
+	private final BusinessRuleService service = (BusinessRuleService) ServiceProvider.getApplicationService(new BusinessRuleService());
 	
 //	@GET
 //	@Produces("application/json")

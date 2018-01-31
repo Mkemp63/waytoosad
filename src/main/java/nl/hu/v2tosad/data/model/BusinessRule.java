@@ -37,56 +37,37 @@ public class BusinessRule {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getStatus() {
+
+    public String getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Date getDateModified() {
+
+    public Date getDateModified() {
 		return dateModified;
 	}
-	public void setDateModified(Date dateModified) {
-		this.dateModified = dateModified;
-	}
-	public String getCode() {
+
+    public String getCode() {
 		return code;
 	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getBusinessRuleType() {
+
+    public String getBusinessRuleType() {
 		return businessRuleType;
 	}
-	public void setBusinessRuleType(String businessRuleType) {
-		this.businessRuleType = businessRuleType;
-	}
-	public String getRule_Name() {
+
+    public String getRule_Name() {
 		return rule_Name;
 	}
-	public void setRule_Name(String rule_Name) {
-		this.rule_Name = rule_Name;
-	}
-	public String getDiscription() {
+
+    public String getDiscription() {
 		return discription;
 	}
-	public void setDiscription(String discription) {
-		this.discription = discription;
-	}
-	public String getTableName() {
+
+    public String getTableName() {
 		return tableName;
 	}
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
-	public int getSchemaID() {
+
+    public int getSchemaID() {
 		return schemaID;
-	}
-	public void setSchemaID(int schemaID) {
-		this.schemaID = schemaID;
 	}
 
     @Override

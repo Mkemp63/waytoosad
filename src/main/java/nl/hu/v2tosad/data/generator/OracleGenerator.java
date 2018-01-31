@@ -124,18 +124,18 @@ public class OracleGenerator implements Generator{
         return result.toString();
     }
 
-    public String generateAttributeOtherRule(AttributeOtherRule b){
+    private String generateAttributeOtherRule(AttributeOtherRule b){
         return "not implemented";
     }
 
-    public String generateEntityOtherRule(EntityOtherRule b){
+    private String generateEntityOtherRule(EntityOtherRule b){
         return "not implemented";
     }
 
-    public String generateModifyRule(ModifyRule b){
+    private String generateModifyRule(ModifyRule b){
         return "not implemented";
     }
-    public String generateTupleOtherRule(TupleOtherRule b){
+    private String generateTupleOtherRule(TupleOtherRule b){
         return "not implemented";
     }
 }

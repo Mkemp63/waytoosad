@@ -30,39 +30,20 @@ public class AttributeRangeRule extends BusinessRule{
 		return rangeRuleId;
 	}
 
-	public void setRangeRuleId(int rangeRuleId) {
-		this.rangeRuleId = rangeRuleId;
-	}
-
-	public int getMinVal() {
+    public int getMinVal() {
 		return minVal;
 	}
 
-	public void setMinval(int minVal) {
-		this.minVal = minVal;
-	}
-
-	public int getMaxVal() {
+    public int getMaxVal() {
 		return maxVal;
 	}
 
-	public void setMaxval(int maxVal) {
-		this.maxVal = maxVal;
-	}
-
-	public String getOperator() {
+    public String getOperator() {
 		return operator;
 	}
 
-	public void setOperator(String operator) {
-		this.operator = operator;
-	}
-
-	public String getColumn() {
+    public String getColumn() {
 		return column;
 	}
 
-	public void setColumn(String column) {
-		this.column = column;
-	}
 }

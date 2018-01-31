@@ -1,13 +1,12 @@
 package nl.hu.v2tosad.data.dao;
 
+import nl.hu.v2tosad.data.model.BusinessRule;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import nl.hu.v2tosad.data.model.BusinessRule;
 
 public class OracleTargetDAO implements TargetDAO{
 	private final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
