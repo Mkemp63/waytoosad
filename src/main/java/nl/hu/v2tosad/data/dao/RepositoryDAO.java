@@ -166,31 +166,6 @@ public class RepositoryDAO {
 		return target;
 	}
 
-	public Database getTarget(){
-        Database db = null;
-        try (Connection conn = this.getConnection()) {
-        	Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM database_schema WHERE ID = 1");
-            while (rs.next()) {
-                String id = rs.getString("id");
-                String name = rs.getString("name");
-                String type = rs.getString("db_type");
-                String url = rs.getString("db_url");
-                String user = rs.getString("db_user");
-                String pass = rs.getString("db_pass");
-                String driv = rs.getString("db_driv");
-                db = new Database(name, type, url, user, pass, driv);
-                System.out.println(db);
-            }
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-	    return db;
-    }
-
     public void setRuleStatus(String status, int id ) {
         try (Connection conn = this.getConnection()) {
         	Statement stmt = conn.createStatement();
@@ -206,6 +181,15 @@ public class RepositoryDAO {
             for (int id : idList) {
                 stmt.execute("DELETE FROM BUSINESSRULE WHERE id = " + id);
             }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
+    public void setDateModified(int id ) {
+        try (Connection conn = this.getConnection()) {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE BUSINESSRULE set DateModified = sysdate where id = " + id);
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
