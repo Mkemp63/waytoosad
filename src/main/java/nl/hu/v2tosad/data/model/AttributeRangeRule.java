@@ -1,5 +1,8 @@
 package nl.hu.v2tosad.data.model;
 
+import nl.hu.v2tosad.data.generator.Generator;
+import nl.hu.v2tosad.data.generator.GeneratorFactory;
+
 //POJO
 public class AttributeRangeRule extends BusinessRule{
 	private int rangeRuleId;
@@ -19,10 +22,8 @@ public class AttributeRangeRule extends BusinessRule{
 	}
 
     public String generateCode(String dbType){
- /*       Generate g = new GenerateFactory(dbType);
-        return g.generateAttributeRangeRule();*/
-        return null;
-
+    	Generator gen = GeneratorFactory.getGenerator(dbType);
+        return gen.generateAttributeRangeRule(this);
     }
 
 	public int getRangeRuleId() {

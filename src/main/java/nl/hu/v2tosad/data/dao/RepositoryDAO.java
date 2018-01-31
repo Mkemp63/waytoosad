@@ -28,13 +28,8 @@ public class RepositoryDAO {
 			throw new RuntimeException(ex);
 		}
 	}
-	
-	//TODO
-//	public BusinessRule getRuleDetails() {
-//		
-//	}
 
-	public ArrayList<BusinessRule> getBusinessRules(ArrayList<Integer> rulelist) {
+	public ArrayList<BusinessRule> getAllBusinessRules(ArrayList<Integer> rulelist) {
         ArrayList<BusinessRule> rules = new ArrayList<>();
 	    for(int id : rulelist) {
             BusinessRule br = new BusinessRule();

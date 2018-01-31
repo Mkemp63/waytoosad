@@ -48,6 +48,20 @@ public class OracleTargetDAO implements TargetDAO{
 		} 
 	}
 	
+	public void dropRules(ArrayList<BusinessRule> rules) {
+		try(Connection conn = getConnection()) {
+			Statement stmt = conn.createStatement();
+			for(BusinessRule br : rules) {
+				String sql = "ALTER TABLE " + br.getTableName() + " DROP CONSTRAINT " + br.getCode();
+				System.out.println(sql);
+			}
+			stmt.close();
+			conn.close();
+		} catch ( SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+	
 	public void updateAffected(int id) {
 		RepositoryDAO repo = new RepositoryDAO();
 		repo.setRuleStatus("ACTIVE", id);

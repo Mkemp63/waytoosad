@@ -9,6 +9,8 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -17,46 +19,49 @@ import java.util.ArrayList;
 public class BusinessRuleResource {
 	private BusinessRuleService service = (BusinessRuleService) ServiceProvider.getApplicationService(new BusinessRuleService());
 	
-	/*@GET
-	@Produces("application/json")
-	@Path("{id}")
-	public String getBusinessRule(@PathParam("id") int id) {
-		BusinessRule br = service.getBusinessRule(id);
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		String dataString = sdf.format(br.getDateModified());
-		
-		JsonArrayBuilder jab = Json.createArrayBuilder();
-		
-		JsonObjectBuilder job = Json.createObjectBuilder();
-		
-		job.add("id", br.getId());
-		job.add("status", br.getStatus());
-		job.add("dateModified", dataString);
-		job.add("code", br.getCode());
-		job.add("businessRuleType", br.getBusinessRuleType());
-		job.add("rule_Name", br.getRule_Name());
-		job.add("discription", br.getDiscription());
-		job.add("tableName", br.getTableName());
-		
-		jab.add(job);
-		
-		JsonArray array = jab.build();
-
-		
-		return array.toString();
-		
-	}
+//	@GET
+//	@Produces("application/json")
+//	@Path("{id}")
+//	public String getBusinessRule(@PathParam("id") int id) {
+//		BusinessRule br = service.getBusinessRule(id);
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//		String dataString = sdf.format(br.getDateModified());
+//		
+//		JsonArrayBuilder jab = Json.createArrayBuilder();
+//		
+//		JsonObjectBuilder job = Json.createObjectBuilder();
+//		
+//		job.add("id", br.getId());
+//		job.add("status", br.getStatus());
+//		job.add("dateModified", dataString);
+//		job.add("code", br.getCode());
+//		job.add("businessRuleType", br.getBusinessRuleType());
+//		job.add("rule_Name", br.getRule_Name());
+//		job.add("discription", br.getDiscription());
+//		job.add("tableName", br.getTableName());
+//		
+//		jab.add(job);
+//		
+//		JsonArray array = jab.build();
+//
+//		
+//		return array.toString();
+//		
+//	}
 	
 	@POST
-	@Produces("application/json")
-	@Path("{text}")
-	public void doeIets(@PathParam("text") String text) {
-		System.out.println(text);
+	@Path("/update/{id}")
+	public void updateRule(@PathParam("id") int id) {
+		System.out.println("ID van de businessrule: " + id);
+		service.startUpdating(id);
 	}
 
-*/
-
-
+	
+	@POST
+	@Path("/delte/{id}")
+	public void deleteRule(@PathParam("id") int id) {
+		System.out.println("ID van de businessrule: " + id);
+	}
 
     @POST
     @Path("/rules")

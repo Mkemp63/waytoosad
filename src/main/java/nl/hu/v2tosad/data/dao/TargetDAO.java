@@ -11,5 +11,5 @@ public interface TargetDAO {
     public abstract Connection getConnection();
     
     public abstract void generateRules(ArrayList<BusinessRule> rules);
-
+    public abstract void dropRules(ArrayList<BusinessRule> rules);
 }

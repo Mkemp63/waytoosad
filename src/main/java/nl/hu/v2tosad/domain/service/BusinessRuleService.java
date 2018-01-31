@@ -11,31 +11,33 @@ import java.util.ArrayList;
 
 public class BusinessRuleService implements ApplicationService {
 	private ArrayList<BusinessRule> allRules = new ArrayList<BusinessRule>();
-	
-	//TODO
-/*	public void generateCode(ArrayList<BusinessRule> br) {
-		this.target.generateConstraint(br);
-	}*/
-	
-//	public void addTargetSchema(Database db) {
-//		this.target = new TargetDAOImpl(db);
-//	}
+	private RepositoryDAO repo = new RepositoryDAO();
 
-    public void startGenerating(ArrayList<Integer> rulelist) {
-    	RepositoryDAO repo = new RepositoryDAO();
-        System.out.println("Start generating rules");
-        allRules = repo.getBusinessRules(rulelist);
-        System.out.println(allRules);
+    public void startGenerating(ArrayList<Integer> idList) {
+    	this.getBusinesRuleDetails(idList);
+    	
         int targetId = allRules.get(0).getSchemaID();
         TargetDAO targetDAO = repo.getTargetDAO(targetId);
         
         targetDAO.generateRules(allRules);
-//        Database db = repo.getTarget();
-
-
-//        addTargetSchema(db);
-//
-//        target.generateRules(rules);
-//        repo.closeConnection();
+    }
+    
+    public void startUpdating(int id) {
+    	ArrayList<Integer> idList= new ArrayList<Integer>();
+    	idList.add(id);
+    	this.getBusinesRuleDetails(idList);
+    	
+    	int targetId = allRules.get(0).getSchemaID();
+    	TargetDAO targetDAO = repo.getTargetDAO(targetId);
+    	
+    	targetDAO.dropRules(allRules);
+    	targetDAO.generateRules(allRules);
+    }
+    
+    public ArrayList<BusinessRule> getBusinesRuleDetails(ArrayList<Integer> idList) {
+        System.out.println("Start generating rules");
+        allRules = repo.getAllBusinessRules(idList);
+        System.out.println(allRules);
+        return allRules;
     }
 }
