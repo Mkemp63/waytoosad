@@ -56,6 +56,7 @@ public class OracleTargetDAO implements TargetDAO{
 			for(BusinessRule br : rules) {
 				String sql = "ALTER TABLE " + br.getTableName() + " DROP CONSTRAINT " + br.getCode();
 				System.out.println(sql);
+				stmt.executeQuery(sql);
 			}
 			stmt.close();
 			conn.close();

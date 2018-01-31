@@ -30,7 +30,8 @@ public class BusinessRuleResource {
         service.deleteRules(rulelist);
     }
 
-    @PUT
+    @POST
+    @Path("/deactivate")
     public void deactivateRule(InputStream is) {
         ArrayList<Integer> rulelist = inputToList(is);
         System.out.println(rulelist);
@@ -39,7 +40,7 @@ public class BusinessRuleResource {
 
 
     @POST
-    @Path("/rules")
+    @Path("/activate")
     public /*String*/ void generateRules(InputStream is) {
         ArrayList<Integer> rulelist = inputToList(is);
         System.out.println(rulelist);
