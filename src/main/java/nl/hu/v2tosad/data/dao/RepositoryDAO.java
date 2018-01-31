@@ -203,7 +203,9 @@ public class RepositoryDAO {
     public void deleteRules(ArrayList<Integer> idList){
         try (Connection conn = this.getConnection()) {
             Statement stmt = conn.createStatement();
-            stmt.execute("DELETE FROM BUSINESSRULE WHERE id = " + idList);
+            for (int id : idList) {
+                stmt.execute("DELETE FROM BUSINESSRULE WHERE id = " + id);
+            }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
