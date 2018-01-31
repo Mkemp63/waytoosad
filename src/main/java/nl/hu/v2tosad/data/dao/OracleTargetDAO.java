@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class OracleTargetDAO implements TargetDAO{
 	private final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
-	private String DB_URL;
-	private String DB_USER;
-	private String DB_PASS;
+	private final String DB_URL;
+	private final String DB_USER;
+	private final String DB_PASS;
 
 	public OracleTargetDAO(String DB_URL, String DB_USER, String DB_PASS) {
 		this.DB_URL = DB_URL;
