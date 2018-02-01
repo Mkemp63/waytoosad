@@ -15,8 +15,14 @@ public class EntityOtherRule extends BusinessRule {
 		this.columnName = columnName;
 		this.plSqlCode = plSqlCode;
 	}
-	//TODO
 
+	// Retrieves a Generator-class based on the database type given in the paramaters
+	// Then it uses the Generator-class to create a sql statment using the correct SQL statement
+	public String generateCode(String dbType){
+        Generator g = GeneratorFactory.getGenerator(dbType);
+        return g.generateEntityOtherRule(this);
+    }
+	
     @Override
     public String toString() {
         return super.toString()+"EntityOtherRule{" +
@@ -24,9 +30,5 @@ public class EntityOtherRule extends BusinessRule {
                 ", columnName='" + columnName + '\'' +
                 ", plSqlCode='" + plSqlCode + '\'' +
                 '}'+'}';
-    }
-    public String generateCode(String dbType){
-        Generator g = GeneratorFactory.getGenerator(dbType);
-        return g.generateEntityOtherRule(this);
     }
 }
