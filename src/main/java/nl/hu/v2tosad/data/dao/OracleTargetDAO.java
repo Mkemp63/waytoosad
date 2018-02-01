@@ -49,7 +49,7 @@ public class OracleTargetDAO implements TargetDAO{
 		} 
 	}
 	
-	public void dropRules(ArrayList<BusinessRule> rules) { //todo execute statement, fix statement
+	public void dropRules(ArrayList<BusinessRule> rules) {
 		try(Connection conn = getConnection()) {
 			Statement stmt = conn.createStatement();
 			for(BusinessRule br : rules) {

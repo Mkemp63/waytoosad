@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import nl.hu.v2tosad.data.generator.Generator;
 import nl.hu.v2tosad.data.generator.GeneratorFactory;
-//POJO
+
 public class AttributeListRule extends BusinessRule{
 	private int listRuleId;
 	private String column;

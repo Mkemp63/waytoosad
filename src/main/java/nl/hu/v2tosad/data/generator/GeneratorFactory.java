@@ -5,13 +5,7 @@ public class GeneratorFactory {
         Generator g = null;
         if (dbType.equals("Oracle")){
             return new OracleGenerator();
-        } /*else
-        if (dbType.equals("Postgres")){
-            return new PostgresGenerator();
-        } else
-        if (dbType.equals("Mysql")){
-            return new MysqlGenerator();
-        } */
+        } 
         else{return g;}
 
     }
