@@ -169,7 +169,7 @@ public class RepositoryDAO {
         	Statement stmt = conn.createStatement();
             stmt.executeUpdate("UPDATE BUSINESSRULE set STATUS = '" + status + "' where id = " + id);
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            System.out.println("Rule status can't be updated with ID: " + id);
         }
     }
 
@@ -177,7 +177,12 @@ public class RepositoryDAO {
         try (Connection conn = this.getConnection()) {
             Statement stmt = conn.createStatement();
             for (int id : idList) {
-                stmt.execute("DELETE FROM BUSINESSRULE WHERE id = " + id);
+            	try {
+            		stmt.execute("DELETE FROM BUSINESSRULE WHERE id = " + id);
+            	}
+            	catch (SQLException sqle) {
+            		System.out.println("Rule can't be deleted with ID: " + id);
+            	}
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();

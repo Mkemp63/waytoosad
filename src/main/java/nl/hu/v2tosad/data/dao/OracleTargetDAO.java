@@ -26,6 +26,7 @@ public class OracleTargetDAO implements TargetDAO{
 		}
 	}
 	
+	// Method to generate Businessrules in the target database using a list of Businessrule-objects
 	public void generateRules(ArrayList<BusinessRule> rules) {
 		try(Connection conn = getConnection()) {
 			Statement stmt = conn.createStatement();
@@ -35,6 +36,8 @@ public class OracleTargetDAO implements TargetDAO{
 				String sql = br.generateCode("Oracle");
 				System.out.println("Dit is de SQL-code: ");
 				System.out.println(sql);
+				
+				// Because not every rule type is supported we check if the rule is implemented first
 				if (!sql.equals("not implemented")) {
                     stmt.executeQuery(sql);
                     repo.setRuleStatus("ACTIVE", br.getId());
@@ -49,10 +52,14 @@ public class OracleTargetDAO implements TargetDAO{
 		} 
 	}
 	
+	// Method to drop the rules from the target database
+	// With as parameter a list of Businessrule-objects to drop form the target database
 	public void dropRules(ArrayList<BusinessRule> rules) {
 		try(Connection conn = getConnection()) {
 			Statement stmt = conn.createStatement();
 			for(BusinessRule br : rules) {
+				// A nested try-catch block to drop a constraint or trigger
+				// This is because some Businessrules are only written in triggers and some are written in constraints
 				try {
 					String sql = "ALTER TABLE " + br.getTableName() + " DROP CONSTRAINT " + br.getCode();
 					System.out.println(sql);
@@ -74,6 +81,8 @@ public class OracleTargetDAO implements TargetDAO{
 		}
 	}
 
+	// Method to get a connetction with the database
+	// Using the attributes of this class
 	public Connection getConnection() {
 		try {
 			return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
