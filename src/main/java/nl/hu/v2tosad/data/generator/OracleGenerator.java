@@ -2,8 +2,6 @@ package nl.hu.v2tosad.data.generator;
 
 import nl.hu.v2tosad.data.model.*;
 
-//In this class the SQL-statements are created for an Oracle database
-//Every rule type that has not been implemented yet return a String-object with "not implemented" (We use this String in the OracleTargetDAO-class at the generateRules() method)
 public class OracleGenerator implements Generator{
 
 

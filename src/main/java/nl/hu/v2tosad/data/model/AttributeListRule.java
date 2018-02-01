@@ -19,8 +19,6 @@ public class AttributeListRule extends BusinessRule{
 		this.operator = operator;
 	}
 	
-	// Retrieves a Generator-class based on the database type given in the paramaters
-	// Then it uses the Generator-class to create a sql statment using the correct SQL statement
     public String generateCode(String dbType){
     	Generator gen = GeneratorFactory.getGenerator(dbType);
     	return gen.generateAttributeListRule(this);
