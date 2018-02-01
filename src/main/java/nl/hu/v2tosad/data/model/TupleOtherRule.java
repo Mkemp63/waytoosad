@@ -3,7 +3,6 @@ package nl.hu.v2tosad.data.model;
 import nl.hu.v2tosad.data.generator.Generator;
 import nl.hu.v2tosad.data.generator.GeneratorFactory;
 
-//POJO
 public class TupleOtherRule extends BusinessRule{
 	private int otherRuleId;
 	private String columnName;

@@ -87,8 +87,6 @@ public class RepositoryDAO {
                     rs.close();
                     rs = stmt.executeQuery("SELECT * FROM LIST_RULE_VALUE WHERE FK_LIST_RULE_ID = " + list_id);
 
-                    //Parse BusinessRule object naar een AttributeListRule zodat de functies gebruikt kunnen worden van de AttributeListRule klasse
-                    //DIt is nodig om de listvalues toe te kunnen voegen aan de arraylist van AttributeListRule
                     AttributeListRule attlr = (AttributeListRule) br;
 
                     while (rs.next()) {
