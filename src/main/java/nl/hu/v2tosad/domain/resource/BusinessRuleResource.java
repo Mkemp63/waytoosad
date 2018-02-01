@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 // starts process for rest service
+// This is where the ajax/json calls from Apex are caught
 @Path("/generate")
 public class BusinessRuleResource {
 	private final BusinessRuleService service = (BusinessRuleService) ServiceProvider.getApplicationService(new BusinessRuleService());
